@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import boxOfficeReducer from './reducer/boxofficeSlice';
+import nowPlayingReducer from './reducer/nowPlayingSlice';
 
 export default configureStore({
   reducer: {
-    boxOffice: boxOfficeReducer,
+    nowPlaying: nowPlayingReducer,
   },
 });
