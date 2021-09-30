@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import NowPlaying from './component/nowPlaying';
+import NowPlayingContainer from './component/nowPlayingContainer';
 
 class App extends Component {
   render() {
-    return <NowPlaying />;
+    return <NowPlayingContainer />;
   }
 }
 export default App;

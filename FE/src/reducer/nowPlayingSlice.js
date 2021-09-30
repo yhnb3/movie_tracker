@@ -35,11 +35,11 @@ export function fetchMovies() {
 
     try {
       const response = await fetch(
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=36280866a80b71c69c0131b57e760ee2&language=en-US&page=1',
+        'https://api.themoviedb.org/3/movie/now_playing?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=1',
       );
       const data = await response.json();
 
-      dispatch(getNowPlayingSuccess(data));
+      dispatch(getNowPlayingSuccess(data.results));
     } catch (error) {
       dispatch(getNowPlayingFailure());
     }
