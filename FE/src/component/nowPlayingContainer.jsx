@@ -15,8 +15,14 @@ export default function NowPlayingContainer() {
     if (loading) return <p>Loading recipes...</p>;
     if (hasErrors) return <p>Cannot display recipes...</p>;
 
+    console.log(movies);
     return movies.map((movie) => <NowPlaying movie={movie} key={movie.id} />);
   };
 
-  return <div>{renderMovies()}</div>;
+  return (
+    <div>
+      <p>now playing</p>
+      <div className="grid grid-cols-3">{renderMovies()}</div>
+    </div>
+  );
 }
