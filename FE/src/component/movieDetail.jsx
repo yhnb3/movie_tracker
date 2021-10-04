@@ -15,8 +15,8 @@ export default function movieDetail({ movie }) {
 
   renderGenre();
   return (
-    <div className="mx-auto p-6">
-      <img className="rounded-2xl" src={backDropUrl} alt="" />
+    <div>
+      <img src={backDropUrl} alt="" />
       <div className="p-1">{renderGenre()}</div>
       <p>{movie.title}</p>
     </div>

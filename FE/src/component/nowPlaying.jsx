@@ -6,11 +6,11 @@ export default function NowPlaying({ movie }) {
   const posterUrl = `https://image.tmdb.org/t/p/w200/${movie.poster_path}`;
   const pathUrl = `/movie/${movie.id}`;
   return (
-    <div className="mx-auto p-6">
+    <div className="flex-1">
       <Link to={pathUrl}>
-        <img className="rounded-2xl" src={posterUrl} alt="" />
+        <img className="rounded-2xl object-contain" src={posterUrl} alt="" />
       </Link>
-      <p>{movie.title}</p>
+      <p className="text-xs">{movie.title}</p>
     </div>
   );
 }
