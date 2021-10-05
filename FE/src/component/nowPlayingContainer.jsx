@@ -22,7 +22,9 @@ export default function NowPlayingContainer() {
   return (
     <div>
       <p>now playing</p>
-      <div className="flex flex-nowrap overflow-x-scroll">{renderMovies()}</div>
+      <div className="flex overflow-y-hidden overflow-x-auto">
+        <div className="flex flex-nowrap">{renderMovies()}</div>
+      </div>
     </div>
   );
 }
