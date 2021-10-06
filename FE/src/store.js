@@ -1,10 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import nowPlayingReducer from './reducer/nowPlayingSlice';
-import movieDetailReducer from './reducer/movieDetailSlice';
+import {
+  contentListReducer,
+  movieDetailReducer,
+  tvDetailReducer,
+} from './component/index';
 
 export default configureStore({
   reducer: {
-    nowPlaying: nowPlayingReducer,
+    contentList: contentListReducer,
     movieDetail: movieDetailReducer,
+    tvDetail: tvDetailReducer,
   },
 });

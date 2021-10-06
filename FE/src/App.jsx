@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-
-import NowPlayingContainer from './component/nowPlayingContainer';
-import MovieDetailConatainer from './component/movieDetailContainer';
+import {
+  TvDetailContainer,
+  MovieDetailContainer,
+  Home,
+} from './component/index';
 
 class App extends Component {
   render() {
     return (
       <div>
         <Route exact path="/">
-          <NowPlayingContainer />
+          <Home />
         </Route>
         <Route path="/movie/:id">
-          <MovieDetailConatainer />
+          <MovieDetailContainer />
+        </Route>
+        <Route path="/tv/:id">
+          <TvDetailContainer />
         </Route>
       </div>
     );
