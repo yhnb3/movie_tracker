@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   loading: false,
   hasErrors: false,
-  movies: {},
+  items: {},
 };
 
 export const slice = createSlice({
@@ -13,10 +13,10 @@ export const slice = createSlice({
   reducers: {
     getContentList: (state, { payload }) => {
       state.loading = true;
-      state.movies[payload] = [];
+      state.items[payload] = [];
     },
     getContentListSuccess: (state, { payload }) => {
-      state.movies[payload.category] = payload.list;
+      state.items[payload.category] = payload.list;
       state.loading = false;
       state.hasErrors = false;
     },

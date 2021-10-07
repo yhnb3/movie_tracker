@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import {
-  TvDetailContainer,
-  MovieDetailContainer,
-  Home,
-} from './component/index';
+import { TvDetailContainer, MovieDetailContainer } from './component/index';
+
+import { Home } from './pages/index';
 
 class App extends Component {
   render() {

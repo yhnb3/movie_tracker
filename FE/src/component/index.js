@@ -3,9 +3,6 @@ export { default as movieDetailReducer } from './movieDetail/movieDetailSlice';
 export { default as contentListReducer } from './contentList/contentListSlice';
 export { default as tvDetailReducer } from './tvDetail/tvDetailSlice';
 
-// home
-export { default as Home } from './home/home';
-
 // containers
 export { default as ContentListContainer } from './contentList/contentListContainer';
 export { default as MovieDetailContainer } from './movieDetail/movieDetailContainer';

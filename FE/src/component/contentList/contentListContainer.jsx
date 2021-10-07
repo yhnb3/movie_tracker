@@ -5,14 +5,14 @@ import ContentList from './contentList';
 
 export default function contentListContainer({ category, url }) {
   const dispatch = useDispatch();
-  const { loading, hasErrors, movies } = useSelector(contentList);
+  const { loading, hasErrors, items } = useSelector(contentList);
 
   useEffect(() => {
     dispatch(fetchMovies({ category, url }));
   }, [dispatch]);
 
-  const renderMovies = () => {
-    const contents = movies[category] || [];
+  const renderContentsList = () => {
+    const contents = items[category] || [];
 
     if (loading) return <p>Loading...</p>;
     if (hasErrors)
@@ -25,9 +25,8 @@ export default function contentListContainer({ category, url }) {
 
   return (
     <div>
-      <p>{category}</p>
       <div className="flex overflow-y-hidden overflow-x-auto">
-        <div className="flex flex-nowrap">{renderMovies()}</div>
+        <div className="flex flex-nowrap">{renderContentsList()}</div>
       </div>
     </div>
   );
