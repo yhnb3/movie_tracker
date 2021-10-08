@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchMovies, contentList } from './contentListSlice';
 import ContentList from './contentList';
 
-export default function contentListContainer({ category, url }) {
+export default function contentListContainer({ name, url, category }) {
   const dispatch = useDispatch();
   const { loading, hasErrors, items } = useSelector(contentList);
 
   useEffect(() => {
-    dispatch(fetchMovies({ category, url }));
+    dispatch(fetchMovies({ name, url, category }));
   }, [dispatch]);
 
   const renderContentsList = () => {
-    const contents = items[category] || [];
+    const contents = (items[name] && items[name].data) || [];
 
     if (loading) return <p>Loading...</p>;
     if (hasErrors)
