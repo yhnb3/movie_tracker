@@ -2,18 +2,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-  loading: false,
-  hasErrors: false,
   items: {
     populars: {
-      currentCategory: 'movie',
-      tv: {},
-      movie: {},
+      currentSection: 'movie',
+      section: {
+        tv: { loading: false, hasErrors: false, data: [] },
+        movie: { loading: false, hasErrors: false, data: [] },
+      },
     },
-    latest: {
-      currentCategory: 'movie',
-      tv: {},
-      movie: {},
+    lastest: {
+      currentSection: 'movie',
+      section: {
+        tv: { loading: false, hasErrors: false, data: [] },
+        movie: { loading: false, hasErrors: false, data: [] },
+      },
     },
   },
 };
@@ -23,23 +25,16 @@ export const slice = createSlice({
   initialState,
   reducers: {
     getContentList: (state, { payload }) => {
-      state.loading = true;
-      state.items[payload] = [];
+      state.items[payload.name].section[payload.category].loading = true;
     },
     getContentListSuccess: (state, { payload }) => {
-      state.items[payload.name][payload.category] = payload.list;
-      state.loading = false;
-      state.hasErrors = false;
+      state.items[payload.name].section[payload.category].data = payload.list;
+      state.items[payload.name].section[payload.category].loading = false;
+      state.items[payload.name].section[payload.category].hasErrors = false;
     },
-    getContentListFailure: (state) => {
-      state.loading = false;
-      state.hasErrors = true;
-    },
-    addCategory: (state, { payload }) => {
-      state.items[payload.name] = {
-        data: state.items[payload.name],
-        category: payload.category,
-      };
+    getContentListFailure: (state, { payload }) => {
+      state.items[payload.name].section[payload.category].loading = false;
+      state.items[payload.name].section[payload.category].hasErrors = true;
     },
     changeCategory: (state, { payload }) => {
       state.items[payload.section].currentCategory = payload.category;
@@ -57,14 +52,13 @@ export const {
 
 export function fetchMovies({ url, name, category }) {
   return async (dispatch) => {
-    dispatch(getContentList(name));
-    dispatch(addCategory({ name, category }));
+    dispatch(getContentList({ name, category }));
     try {
       const response = await fetch(url);
       const data = await response.json();
-      dispatch(getContentListSuccess({ name, list: data.results }));
+      dispatch(getContentListSuccess({ name, list: data.results, category }));
     } catch (error) {
-      dispatch(getContentListFailure());
+      dispatch(getContentListFailure({ name, category }));
     }
   };
 }
