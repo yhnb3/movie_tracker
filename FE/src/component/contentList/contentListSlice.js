@@ -4,14 +4,14 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   items: {
     populars: {
-      currentSection: 'movie',
+      currentCategory: 'movie',
       section: {
         tv: { loading: false, hasErrors: false, data: [] },
         movie: { loading: false, hasErrors: false, data: [] },
       },
     },
     lastest: {
-      currentSection: 'movie',
+      currentCategory: 'movie',
       section: {
         tv: { loading: false, hasErrors: false, data: [] },
         movie: { loading: false, hasErrors: false, data: [] },
@@ -37,7 +37,7 @@ export const slice = createSlice({
       state.items[payload.name].section[payload.category].hasErrors = true;
     },
     changeCategory: (state, { payload }) => {
-      state.items[payload.section].currentCategory = payload.category;
+      state.items[payload.name].currentCategory = payload.category;
     },
   },
 });

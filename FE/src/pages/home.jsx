@@ -12,7 +12,11 @@ const urls = {
 
 const ContentListContainers = () => (
   <div>
-    <ContentListContainer urls={urls} name="populars" />
+    <ContentListContainer
+      urls={urls}
+      name="populars"
+      categories={['tv', 'movie']}
+    />
   </div>
 );
 
