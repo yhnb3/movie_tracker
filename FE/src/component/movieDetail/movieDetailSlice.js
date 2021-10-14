@@ -33,10 +33,15 @@ export function fetchMovies(id) {
   return async (dispatch) => {
     dispatch(getMovieDetail());
     try {
-      const response = await fetch(
+      const detailResponse = await fetch(
         `https://api.themoviedb.org/3/movie/${id.id}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
       );
-      const data = await response.json();
+      const videoResponse = await fetch(
+        `https://api.themoviedb.org/3/movie/${id.id}/videos?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
+      );
+
+      const data = await detailResponse.json();
+      data.video = await videoResponse.json();
 
       dispatch(getMovieDetailSuccess(data));
     } catch (error) {

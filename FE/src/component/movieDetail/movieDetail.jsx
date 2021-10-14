@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Youtube from './youtube';
+
 export default function movieDetail({ movie }) {
   const backDropUrl = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
 
@@ -18,6 +20,7 @@ export default function movieDetail({ movie }) {
       <img src={backDropUrl} alt="" />
       <div className="p-1">{renderGenre()}</div>
       <p>{movie.title}</p>
+      <Youtube video={movie.video.results[0]} />
     </div>
   );
 }
