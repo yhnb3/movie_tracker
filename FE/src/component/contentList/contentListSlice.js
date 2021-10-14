@@ -5,17 +5,15 @@ export const initialState = {
   items: {
     populars: {
       currentCategory: 'movie',
-      section: {
-        tv: { loading: false, hasErrors: false, data: [] },
-        movie: { loading: false, hasErrors: false, data: [] },
-      },
+      section: {},
     },
-    lastest: {
+    top_rated: {
       currentCategory: 'movie',
-      section: {
-        tv: { loading: false, hasErrors: false, data: [] },
-        movie: { loading: false, hasErrors: false, data: [] },
-      },
+      section: {},
+    },
+    trending: {
+      currentCategory: 'day',
+      section: {},
     },
   },
 };
@@ -25,7 +23,11 @@ export const slice = createSlice({
   initialState,
   reducers: {
     getContentList: (state, { payload }) => {
-      state.items[payload.name].section[payload.category].loading = true;
+      state.items[payload.name].section[payload.category] = {
+        loading: true,
+        hasErrors: false,
+        data: [],
+      };
     },
     getContentListSuccess: (state, { payload }) => {
       state.items[payload.name].section[payload.category].data = payload.list;

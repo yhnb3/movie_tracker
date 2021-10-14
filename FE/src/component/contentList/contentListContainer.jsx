@@ -12,11 +12,11 @@ export default function contentListContainer({ urls, name, categories }) {
   const item = items[name];
 
   useEffect(() => {
-    if (!items[name].section[items[name].currentCategory].data.length) {
+    if (!items[name].section[items.currentCategory]) {
       dispatch(
         fetchMovies({
           name,
-          url: urls[name][item.currentCategory],
+          url: urls[item.currentCategory],
           category: items[name].currentCategory,
         }),
       );
@@ -26,11 +26,13 @@ export default function contentListContainer({ urls, name, categories }) {
   const categoryChange = ({ category, section }) => {
     dispatch(changeCategory({ category, name: section }));
   };
+
   const renderContentsList = () => {
     const category = item.currentCategory;
-    const contents = item.section[category].data;
+    const contents =
+      (item.section[category] && item.section[category].data) || [];
 
-    if (item.section[category].loading) return <p>Loading...</p>;
+    if (!item.section[category]) return <p>Loading...</p>;
     if (item.section[category].hasErrors)
       return <p>api를 불러오지 못했습니다. 새로고침을 해주세요.</p>;
 
