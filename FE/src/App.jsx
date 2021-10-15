@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { TvDetailContainer, MovieDetailContainer } from './component/index';
 
-import { Home, Header } from './pages/index';
+import {
+  Home,
+  Header,
+  MovieContainer,
+  StreamingContainer,
+} from './pages/index';
 
 class App extends Component {
   render() {
@@ -17,6 +22,12 @@ class App extends Component {
         </Route>
         <Route path="/tv/:id">
           <TvDetailContainer />
+        </Route>
+        <Route path="/movie">
+          <MovieContainer />
+        </Route>
+        <Route path="/streaming">
+          <StreamingContainer />
         </Route>
       </div>
     );
