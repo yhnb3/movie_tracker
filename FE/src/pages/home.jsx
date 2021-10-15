@@ -29,7 +29,7 @@ const sectionList = [
 ];
 
 const ContentListContainers = () => (
-  <div>
+  <div className="px-48">
     {sectionList.map((sectionItem) => (
       <ContentListContainer
         key={sectionItem.name}

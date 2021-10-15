@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { TvDetailContainer, MovieDetailContainer } from './component/index';
 
-import { Home } from './pages/index';
+import { Home, Header } from './pages/index';
 
 class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Route exact path="/">
           <Home />
         </Route>
