@@ -5,7 +5,14 @@ module.exports = {
     flex: {
       scorll: '0 0 auto',
     },
-    extend: {},
+    extend: {
+      width: {
+        img: '150px',
+      },
+      heigth: {
+        img: '225px',
+      },
+    },
   },
   variants: {
     extend: {},

@@ -12,14 +12,6 @@ const sectionList = [
     },
   },
   {
-    name: 'top_rated',
-    urls: {
-      movie:
-        'https://api.themoviedb.org/3/movie/top_rated?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=1',
-      tv: 'https://api.themoviedb.org/3/tv/top_rated?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=1',
-    },
-  },
-  {
     name: 'trending',
     urls: {
       day: 'https://api.themoviedb.org/3/trending/all/day?api_key=36280866a80b71c69c0131b57e760ee2',

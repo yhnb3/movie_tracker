@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function header() {
   return (
-    <div className="h-20 w-full bg-blue-300">
+    <header className="h-20 w-full bg-blue-300">
       <div className="flex h-full px-48 items-center">
         <Link to="/">
           <button
@@ -28,6 +28,6 @@ export default function header() {
           </button>
         </Link>
       </div>
-    </div>
+    </header>
   );
 }
