@@ -12,6 +12,9 @@ module.exports = {
       heigth: {
         img: '225px',
       },
+      inset: {
+        '1/8': '12.5%',
+      },
     },
   },
   variants: {

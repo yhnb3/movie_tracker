@@ -4,11 +4,8 @@ export default function rateCircle({ rate, color }) {
   const dashArray = `${(rate * Math.PI * 2 * 17) / 10} ${
     Math.PI * 2 * 17 - (rate * Math.PI * 2 * 17) / 10
   }`;
-
-  console.log(rate);
   const dashOffset = (Math.PI * 2 * 17) / 4;
 
-  console.log(dashArray, Math.PI * 17);
   return (
     <svg
       version="1.1"
