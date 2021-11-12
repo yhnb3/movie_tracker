@@ -7,13 +7,13 @@ export default function categoryBtn({
   currentCategory,
 }) {
   return (
-    <div className="flex">
+    <div className="flex mx-2 rounded-full border-1 border-black">
       {categories.map((category) => {
         if (currentCategory === category) {
           return (
             <button
               key={category}
-              className="border-2 border-blue-300 p-1 mx-1"
+              className="rounded-full border-2 border-blue-300 p-1 mx-1"
               onClick={() => categoryChange({ section, category })}
               type="button"
             >

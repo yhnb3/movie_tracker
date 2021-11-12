@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -9,8 +10,9 @@ module.exports = {
       width: {
         img: '150px',
       },
-      heigth: {
+      height: {
         img: '225px',
+        poster: '570px',
       },
       inset: {
         '1/8': '12.5%',
@@ -20,5 +22,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

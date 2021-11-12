@@ -5,14 +5,19 @@ import { fetchMovies, changeCategory, contentList } from './contentListSlice';
 import CategoryBtn from './categoryBtn';
 import ContentList from './contentList';
 
-export default function contentListContainer({ urls, name, categories }) {
+export default function contentListContainer({
+  urls,
+  name,
+  categories,
+  title,
+}) {
   const dispatch = useDispatch();
   const { items } = useSelector(contentList);
 
   const item = items[name];
 
   useEffect(() => {
-    if (!items[name].section[items.currentCategory]) {
+    if (!items[name].section[items[name].currentCategory]) {
       dispatch(
         fetchMovies({
           name,
@@ -38,14 +43,19 @@ export default function contentListContainer({ urls, name, categories }) {
 
     return (
       <div>
-        <p>{name}</p>
-        <CategoryBtn
-          items={items}
-          categories={categories}
-          section={name}
-          currentCategory={category}
-          categoryChange={categoryChange}
-        />
+        <div className="flex flex-row my-3">
+          <div className="flex items-center">
+            <p className="font-bold">{title}</p>
+          </div>
+          <CategoryBtn
+            items={items}
+            categories={categories}
+            section={name}
+            currentCategory={category}
+            categoryChange={categoryChange}
+          />
+        </div>
+
         <div className="flex overflow-y-hidden overflow-x-auto">
           <div className="flex flex-nowrap">
             {contents.map((content) => (

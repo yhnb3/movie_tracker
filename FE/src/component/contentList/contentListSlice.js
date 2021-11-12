@@ -4,15 +4,15 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   items: {
     populars: {
-      currentCategory: 'movie',
+      currentCategory: 'Movie',
       section: {},
     },
     top_rated: {
-      currentCategory: 'movie',
+      currentCategory: 'Movie',
       section: {},
     },
     trending: {
-      currentCategory: 'day',
+      currentCategory: '오늘',
       section: {},
     },
   },

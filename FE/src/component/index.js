@@ -7,3 +7,7 @@ export { default as tvDetailReducer } from './tvDetail/tvDetailSlice';
 export { default as ContentListContainer } from './contentList/contentListContainer';
 export { default as MovieDetailContainer } from './movieDetail/movieDetailContainer';
 export { default as TvDetailContainer } from './tvDetail/tvDetailConatiner';
+
+// constant
+export { default as Detail } from './constant/detail';
+export { default as RateCircle } from './constant/rateCircle';
