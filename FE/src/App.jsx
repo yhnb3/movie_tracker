@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { TvDetailContainer, MovieDetailContainer } from './component/index';
+import { Route, Routes } from 'react-router-dom';
+import { MovieDetailContainer, TvDetailContainer } from './component/index';
+import TVDetailContainer from './component/tvDetail/tvDetailConatiner';
 
 import {
   Home,
@@ -14,21 +15,28 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/movie/:id">
-          <MovieDetailContainer />
-        </Route>
-        <Route path="/tv/:id">
-          <TvDetailContainer />
-        </Route>
-        <Route path="/movie">
-          <MovieContainer />
-        </Route>
-        <Route path="/streaming">
-          <StreamingContainer />
-        </Route>
+        <Routes>
+          <Route index path="/" element={<Home />} />
+          <Route path="movie" element={<MovieDetailContainer />}>
+            <Route path=":id" element={<MovieDetailContainer />} />
+          </Route>
+          <Route path="tv" element={<TVDetailContainer />}>
+            <Route path=":id" element={<TvDetailContainer />} />
+          </Route>
+          <Route
+            path="/movie/popular"
+            element={<MovieContainer section="popular" />}
+          />
+          <Route
+            path="/movie/top-rated"
+            element={<MovieContainer section="top-rated" />}
+          />
+          <Route
+            path="/movie/now-playing"
+            element={<MovieContainer section="now-playing" />}
+          />
+          <Route path="/streaming/:section" element={<StreamingContainer />} />
+        </Routes>
       </div>
     );
   }

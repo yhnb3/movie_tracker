@@ -17,7 +17,7 @@ export default function MovieDetailContainer() {
   const renderMovie = () => {
     if (loading) return <p>Loading recipes...</p>;
     if (hasErrors) return <p>Cannot display recipes...</p>;
-
+    console.log(movie);
     return <Detail content={movie} />;
   };
 

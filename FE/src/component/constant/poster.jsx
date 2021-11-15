@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RateCircle } from '../index';
+import RateCircle from './rateCircle';
 
-export default function contentList({ content }) {
+export default function poster({ content }) {
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const pathUrl = content.title ? `/movie/${content.id}` : `/${content.id}`;
 

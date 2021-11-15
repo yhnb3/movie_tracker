@@ -11,12 +11,12 @@ export default function header() {
             HOME
           </button>
         </Link>
-        <Link to="/movie">
+        <Link to="/movie/popular">
           <button className="mr-12 font-bold text-white text-xl" type="button">
             영화
           </button>
         </Link>
-        <Link to="/streaming">
+        <Link to="/streaming/popular">
           <button className="font-bold text-white text-xl" type="button">
             스트리밍 드라마
           </button>

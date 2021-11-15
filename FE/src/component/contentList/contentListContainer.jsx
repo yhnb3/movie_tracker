@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchMovies, changeCategory, contentList } from './contentListSlice';
 
 import CategoryBtn from './categoryBtn';
-import ContentList from './contentList';
+import { Poster } from '../index';
 
 export default function contentListContainer({
   urls,
@@ -59,7 +59,7 @@ export default function contentListContainer({
         <div className="flex overflow-y-hidden overflow-x-auto">
           <div className="flex flex-nowrap">
             {contents.map((content) => (
-              <ContentList content={content} key={content.id} />
+              <Poster content={content} key={content.id} />
             ))}
           </div>
         </div>
