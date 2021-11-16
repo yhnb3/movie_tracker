@@ -2,9 +2,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
+  page: 1,
   loading: false,
   hasErrors: false,
   data: [],
+  newData: [],
 };
 
 export const slice = createSlice({
@@ -31,8 +33,12 @@ export const slice = createSlice({
   },
 });
 
-export const { getContents, getContentsFailure, getContentsSuccess } =
-  slice.actions;
+export const {
+  getContents,
+  getContentsFailure,
+  getContentsSuccess,
+  getMoreContents,
+} = slice.actions;
 
 export function fetchContents(url) {
   return async (dispatch) => {
@@ -44,6 +50,15 @@ export function fetchContents(url) {
     } catch (error) {
       dispatch(getContentsFailure());
     }
+  };
+}
+
+export function fecthMoreContents(url) {
+  return async (dispatch) => {
+    console.log(url);
+    const response = await fetch(url);
+    const data = await response.json();
+    dispatch(getMoreContents({ data }));
   };
 }
 
