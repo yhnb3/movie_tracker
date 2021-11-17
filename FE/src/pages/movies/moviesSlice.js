@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   page: 1,
+  isMount: true,
   loading: false,
   hasErrors: false,
   data: [],
@@ -30,6 +31,16 @@ export const slice = createSlice({
       state.loading = false;
       state.hasErrors = false;
     },
+    changePage: (state) => {
+      state.page += 1;
+    },
+    initPage: (state) => {
+      state.page = 1;
+      state.data = [];
+    },
+    changeIsMount: (state) => {
+      state.isMount = false;
+    },
   },
 });
 
@@ -38,6 +49,9 @@ export const {
   getContentsFailure,
   getContentsSuccess,
   getMoreContents,
+  changePage,
+  initPage,
+  changeIsMount,
 } = slice.actions;
 
 export function fetchContents(url) {
@@ -55,7 +69,6 @@ export function fetchContents(url) {
 
 export function fecthMoreContents(url) {
   return async (dispatch) => {
-    console.log(url);
     const response = await fetch(url);
     const data = await response.json();
     dispatch(getMoreContents({ data }));

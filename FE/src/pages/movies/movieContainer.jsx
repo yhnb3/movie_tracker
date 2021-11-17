@@ -1,35 +1,58 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContents, content, fecthMoreContents } from './moviesSlice';
+import { debounce } from 'lodash';
+import {
+  fetchContents,
+  content,
+  fecthMoreContents,
+  changePage,
+  initPage,
+  changeIsMount,
+} from './moviesSlice';
 
 import { Poster } from '../../component/index';
 
 export default function movieContainer({ section }) {
   const listDiv = useRef();
-  const [page, setPage] = useState(1);
+  const [newPage, setNewPage] = useState(0);
 
-  const { loading, hasErrors, data } = useSelector(content);
+  const { loading, hasErrors, data, page, isMount } = useSelector(content);
   const url = `https://api.themoviedb.org/3/movie/${section}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=${page}`;
 
   const dispatch = useDispatch();
 
   const handleScroll = (e) => {
-    const element = e.target;
-    console.log(element);
-    // if (element.scrollTop + window.innerHeight >= element.scrollHeight) {
-    //   console.log(element.scrollTop, window.innerHeight, element.scrollHeight);
-    //   setPage(page + 1);
-    // }
+    if (
+      e.target.scrollingElement.scrollHeight ===
+      window.scrollY + window.innerHeight
+    ) {
+      dispatch(changePage());
+    }
   };
 
   useEffect(() => {
-    listDiv.current.addEventListener('scroll', (e) => handleScroll(e));
+    if (newPage === 0 && (page !== 1 || page !== 2)) {
+      dispatch(initPage());
+    }
+    if (isMount) {
+      window.addEventListener(
+        'scroll',
+        debounce((e) => handleScroll(e), 15),
+      );
+      dispatch(changeIsMount());
+    }
     if (page === 1) {
       dispatch(fetchContents(url));
     } else {
       dispatch(fecthMoreContents(url));
+      setNewPage(page);
     }
-    console.log(page);
+    return () => {
+      window.removeEventListener(
+        'scroll',
+        debounce((e) => handleScroll(e), 15),
+      );
+    };
   }, [page]);
 
   const renderContents = () => {
@@ -41,21 +64,9 @@ export default function movieContainer({ section }) {
 
   return (
     <div>
-      <div
-        className="grid grid-cols-5 px-48"
-        onScroll={(e) => handleScroll(e)}
-        ref={listDiv}
-      >
+      <div className="grid grid-cols-5 px-48" ref={listDiv}>
         {renderContents()}
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          setPage(page + 1);
-        }}
-      >
-        페이지 바꾸기
-      </button>
     </div>
   );
 }
