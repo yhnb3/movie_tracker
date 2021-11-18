@@ -8,15 +8,15 @@ import {
   changePage,
   initPage,
   changeIsMount,
+  changeIsNew,
 } from './moviesSlice';
 
 import { Poster } from '../../component/index';
 
 export default function movieContainer({ section }) {
   const listDiv = useRef();
-  const [newPage, setNewPage] = useState(0);
-
-  const { loading, hasErrors, data, page, isMount } = useSelector(content);
+  const { loading, hasErrors, data, page, isMount, isNew } =
+    useSelector(content);
   const url = `https://api.themoviedb.org/3/movie/${section}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=${page}`;
 
   const dispatch = useDispatch();
@@ -31,7 +31,8 @@ export default function movieContainer({ section }) {
   };
 
   useEffect(() => {
-    if (newPage === 0 && (page !== 1 || page !== 2)) {
+    if (isNew) {
+      dispatch(changeIsNew());
       dispatch(initPage());
     }
     if (isMount) {
@@ -41,12 +42,8 @@ export default function movieContainer({ section }) {
       );
       dispatch(changeIsMount());
     }
-    if (page === 1) {
-      dispatch(fetchContents(url));
-    } else {
-      dispatch(fecthMoreContents(url));
-      setNewPage(page);
-    }
+    dispatch(fecthMoreContents(url));
+
     return () => {
       window.removeEventListener(
         'scroll',
