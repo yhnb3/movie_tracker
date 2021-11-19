@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import { useLocation } from 'react-router-dom';
@@ -14,7 +14,6 @@ import {
 import { Poster } from '../../component/index';
 
 export default function movieContainer({ section }) {
-  const listDiv = useRef();
   const location = useLocation();
 
   const { loading, hasErrors, data, page, isMount } = useSelector(content);
@@ -33,7 +32,9 @@ export default function movieContainer({ section }) {
 
   useEffect(() => {
     dispatch(initPage());
+    dispatch(fetchContents(url));
   }, [location]);
+
   useEffect(() => {
     if (isMount) {
       window.addEventListener(
@@ -42,9 +43,7 @@ export default function movieContainer({ section }) {
       );
       dispatch(changeIsMount());
     }
-    if (page === 1) {
-      dispatch(fetchContents(url));
-    } else {
+    if (page > 1) {
       dispatch(fecthMoreContents(url));
     }
 
@@ -65,9 +64,7 @@ export default function movieContainer({ section }) {
 
   return (
     <div>
-      <div className="grid grid-cols-5 px-48" ref={listDiv}>
-        {renderContents()}
-      </div>
+      <div className="grid grid-cols-5 px-48">{renderContents()}</div>
     </div>
   );
 }

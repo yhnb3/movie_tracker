@@ -12,3 +12,4 @@ export { default as TvDetailContainer } from './tvDetail/tvDetailConatiner';
 export { default as Detail } from './constant/detail';
 export { default as RateCircle } from './constant/rateCircle';
 export { default as Poster } from './constant/poster';
+export { default as DropMenu } from './constant/dropMenu';

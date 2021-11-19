@@ -28,12 +28,12 @@ class App extends Component {
             element={<MovieContainer section="popular" />}
           />
           <Route
-            path="/movie/top-rated"
-            element={<MovieContainer section="top-rated" />}
+            path="/movie/top_rated"
+            element={<MovieContainer section="top_rated" />}
           />
           <Route
-            path="/movie/now-playing"
-            element={<MovieContainer section="now-playing" />}
+            path="/movie/now_playing"
+            element={<MovieContainer section="now_playing" />}
           />
           <Route path="/streaming/:section" element={<StreamingContainer />} />
         </Routes>
