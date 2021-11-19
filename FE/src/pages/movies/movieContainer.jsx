@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
+import { useLocation } from 'react-router-dom';
 import {
   fetchContents,
   content,
@@ -8,15 +9,15 @@ import {
   changePage,
   initPage,
   changeIsMount,
-  changeIsNew,
 } from './moviesSlice';
 
 import { Poster } from '../../component/index';
 
 export default function movieContainer({ section }) {
   const listDiv = useRef();
-  const { loading, hasErrors, data, page, isMount, isNew } =
-    useSelector(content);
+  const location = useLocation();
+
+  const { loading, hasErrors, data, page, isMount } = useSelector(content);
   const url = `https://api.themoviedb.org/3/movie/${section}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=${page}`;
 
   const dispatch = useDispatch();
@@ -31,10 +32,9 @@ export default function movieContainer({ section }) {
   };
 
   useEffect(() => {
-    if (isNew) {
-      dispatch(changeIsNew());
-      dispatch(initPage());
-    }
+    dispatch(initPage());
+  }, [location]);
+  useEffect(() => {
     if (isMount) {
       window.addEventListener(
         'scroll',
@@ -42,7 +42,11 @@ export default function movieContainer({ section }) {
       );
       dispatch(changeIsMount());
     }
-    dispatch(fecthMoreContents(url));
+    if (page === 1) {
+      dispatch(fetchContents(url));
+    } else {
+      dispatch(fecthMoreContents(url));
+    }
 
     return () => {
       window.removeEventListener(

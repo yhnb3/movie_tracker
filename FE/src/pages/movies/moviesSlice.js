@@ -3,12 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   page: 1,
-  isNew: true,
   isMount: true,
   loading: false,
   hasErrors: false,
   data: [],
-  newData: [],
 };
 
 export const slice = createSlice({
@@ -42,9 +40,6 @@ export const slice = createSlice({
     changeIsMount: (state) => {
       state.isMount = false;
     },
-    changeIsNew: (state) => {
-      state.isNew = !state.isNew;
-    },
   },
 });
 
@@ -56,7 +51,6 @@ export const {
   changePage,
   initPage,
   changeIsMount,
-  changeIsNew,
 } = slice.actions;
 
 export function fetchContents(url) {
