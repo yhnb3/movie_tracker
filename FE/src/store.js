@@ -5,7 +5,7 @@ import {
   tvDetailReducer,
 } from './component/index';
 
-import movieReducer from './pages/movies/moviesSlice';
+import movieReducer from './pages/contentSlice';
 
 export default configureStore({
   reducer: {

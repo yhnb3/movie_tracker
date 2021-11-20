@@ -9,7 +9,7 @@ import {
   changePage,
   initPage,
   changeIsMount,
-} from './moviesSlice';
+} from '../contentSlice';
 
 import { Poster } from '../../component/index';
 

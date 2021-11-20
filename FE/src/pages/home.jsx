@@ -25,15 +25,20 @@ const sectionList = [
 
 const ContentListContainers = () => (
   <div className="px-48">
-    {sectionList.map((sectionItem) => (
-      <ContentListContainer
-        key={sectionItem.name}
-        title={sectionItem.title}
-        urls={sectionItem.urls}
-        name={sectionItem.name}
-        categories={Object.keys(sectionItem.urls)}
-      />
-    ))}
+    <div className="h-80 w-full bg-blue-200">
+      <p>for searchbar</p>
+    </div>
+    <div>
+      {sectionList.map((sectionItem) => (
+        <ContentListContainer
+          key={sectionItem.name}
+          title={sectionItem.title}
+          urls={sectionItem.urls}
+          name={sectionItem.name}
+          categories={Object.keys(sectionItem.urls)}
+        />
+      ))}
+    </div>
   </div>
 );
 

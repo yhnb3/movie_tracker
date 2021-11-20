@@ -43,6 +43,7 @@ export default function header() {
             영화
           </button>
           <DropMenu
+            category="movie"
             menus={[
               { url: 'popular', name: '인기' },
               { url: 'top_rated', name: '평점 높은' },
@@ -53,7 +54,7 @@ export default function header() {
         </div>
         <div
           className="flex h-full items-center"
-          data-name="movie"
+          data-name="tv"
           onMouseOver={() => showMenu('tv')}
           onFocus={() => showMenu('tv')}
           onMouseOut={() => hideMenu('tv')}
@@ -63,6 +64,7 @@ export default function header() {
             TV 프로그램
           </button>
           <DropMenu
+            category="tv"
             menus={[
               { url: 'popular', name: '인기' },
               { url: 'top_rated', name: '평점 높은' },
