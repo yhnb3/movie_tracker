@@ -9,9 +9,13 @@ export default function dropMenu({ category, menus, isVisible }) {
       }`}
     >
       {menus.map((element) => (
-        <div className="my-2 mx-2">
-          <Link to={`/${category}/${element.url}`} key={element.name}>
-            {element.name}
+        <div key={element.name} className="my-2 mx-2 w-full">
+          <Link
+            className="w-full"
+            to={`/${category}/${element.url}`}
+            key={element.name}
+          >
+            <p>{element.name}</p>
           </Link>
         </div>
       ))}

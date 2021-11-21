@@ -6,6 +6,7 @@ import {
 } from './component/index';
 
 import movieReducer from './pages/contentSlice';
+import searchReducer from './pages/search/searchSlice';
 
 export default configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export default configureStore({
     movieDetail: movieDetailReducer,
     tvDetail: tvDetailReducer,
     content: movieReducer,
+    search: searchReducer,
   },
 });

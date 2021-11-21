@@ -9,6 +9,7 @@ export default function detail({ content }) {
   const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const title = content.title || content.name;
+  const date = content.title ? content.release_date : content.first_air_date;
 
   const rate = (score) => {
     let color = 'green';
@@ -38,15 +39,11 @@ export default function detail({ content }) {
     ));
   };
 
-  const renderDate = () => {
-    const { release_date } = content;
-    return (
-      <span>
-        {release_date.substring(0, 4)}/{release_date.substring(5, 7)}/
-        {release_date.substring(8, 10)}
-      </span>
-    );
-  };
+  const renderDate = () => (
+    <span>
+      {date.substring(0, 4)}/{date.substring(5, 7)}/{date.substring(8, 10)}
+    </span>
+  );
 
   return (
     <div>
@@ -63,7 +60,7 @@ export default function detail({ content }) {
             </div>
             <div className="w-2/3 p-5 bg-black bg-opacity-70 text-white">
               <p>
-                {title}({content.release_date.substring(0, 4)})
+                {title}({date.substring(0, 4)})
               </p>
               <div className="p-1">
                 {renderDate()}
@@ -74,7 +71,7 @@ export default function detail({ content }) {
               <p>{content.tagline}</p>
               <p>개요</p>
               <p className="max-h-12 overflow-ellipsis overflow-hidden line-clamp-2">
-                {content.overview}
+                {content.overview || '해당 언어의 줄거리가 존재하지 않습니다.'}
               </p>
             </div>
           </div>

@@ -5,7 +5,7 @@ import RateCircle from './rateCircle';
 
 export default function poster({ content }) {
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
-  const pathUrl = content.title ? `/movie/${content.id}` : `/${content.id}`;
+  const pathUrl = content.title ? `/movie/${content.id}` : `/tv/${content.id}`;
 
   const rate = (score) => {
     let color = 'green';

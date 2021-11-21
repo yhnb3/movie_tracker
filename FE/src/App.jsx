@@ -8,6 +8,7 @@ import {
   Header,
   MovieContainer,
   StreamingContainer,
+  SearchResult,
 } from './pages/index';
 
 class App extends Component {
@@ -43,6 +44,7 @@ class App extends Component {
             path="/tv/top_rated"
             element={<StreamingContainer section="top_rated" />}
           />
+          <Route path="/search" element={<SearchResult />} />
         </Routes>
       </div>
     );
