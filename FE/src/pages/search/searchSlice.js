@@ -39,8 +39,8 @@ export function fetchSearchResult(url) {
       const response = await fetch(url);
       const data = await response.json();
       dispatch(getSearchResultSuccess({ data: data.results }));
+      console.log(data.results);
     } catch (error) {
-      console.log(error);
       dispatch(getSearchResultFailure());
     }
   };

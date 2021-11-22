@@ -28,5 +28,20 @@ export default function serachResult() {
       );
     return data.map((element) => <p key={element.id}>{element.title}</p>);
   };
-  return <div>{render()}</div>;
+  return (
+    <div className="px-48">
+      <div>
+        <form action="/search?" className="h-10 w-full">
+          <input
+            className="text-gray-400 h-full"
+            type="text"
+            dir="auto"
+            value={query.query}
+            placeholder="영화, tv 프로그램 검색..."
+          />
+        </form>
+      </div>
+      <div>{render()}</div>
+    </div>
+  );
 }
