@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import qs from 'qs';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaSearch } from 'react-icons/fa';
+
 import { search, fetchSearchResult } from './searchSlice';
+import SearchContent from './searchContent';
 
 export default function serachResult() {
   const location = useLocation();
@@ -26,22 +29,30 @@ export default function serachResult() {
           데이터를 불러오는 중 오류가 생겼습니다. 잠시후에 다시 시도해보세요.
         </p>
       );
-    return data.map((element) => <p key={element.id}>{element.title}</p>);
+    return data.map((element) => (
+      <SearchContent key={element.id} content={element} />
+    ));
   };
   return (
-    <div className="px-48">
-      <div>
-        <form action="/search?" className="h-10 w-full">
-          <input
-            className="text-gray-400 h-full"
-            type="text"
-            dir="auto"
-            value={query.query}
-            placeholder="영화, tv 프로그램 검색..."
-          />
-        </form>
+    <div>
+      <div className="flex border-b">
+        <div className="flex px-48">
+          <div className="flex">
+            <FaSearch className="w-3 h-3 my-auto mx-3" />
+          </div>
+          <form action="/search?" className="h-10 w-full">
+            <input
+              className="text-gray-400 h-full outline-none"
+              type="text"
+              name="query"
+              placeholder="영화, tv 프로그램 검색..."
+            />
+          </form>
+        </div>
       </div>
-      <div>{render()}</div>
+      <div className="px-48">
+        <div>{render()}</div>
+      </div>
     </div>
   );
 }
