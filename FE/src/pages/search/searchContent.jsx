@@ -21,6 +21,9 @@ export default function searchContent({ content }) {
     </p>
   );
 
+  if (!content.poster_path) {
+    return <></>;
+  }
   return (
     <div className="flex mt-10 border-gray-300 border rounded-lg">
       <Link to={pathUrl}>
