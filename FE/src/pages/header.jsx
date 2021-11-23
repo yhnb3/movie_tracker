@@ -25,7 +25,7 @@ export default function header() {
   };
   return (
     <header className="h-20 w-full bg-blue-900">
-      <div className="flex h-full px-48 items-center">
+      <div className="flex h-full px-72 items-center">
         <Link to="/">
           <button className="mr-12 font-bold text-white text-xl" type="button">
             HOME

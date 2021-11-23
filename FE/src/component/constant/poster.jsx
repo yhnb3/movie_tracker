@@ -20,7 +20,7 @@ export default function poster({ content }) {
 
     return (
       <div className="absolute w-6 h-6 left-1 bottom-1 z-10">
-        <RateCircle rate={score} color={color} />
+        <RateCircle rate={score} color={color} times={1} />
       </div>
     );
   };

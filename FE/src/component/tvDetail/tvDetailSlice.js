@@ -36,7 +36,12 @@ export function fetchTv(id) {
       const response = await fetch(
         `https://api.themoviedb.org/3/tv/${id.id}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
       );
+      const providerResponse = await fetch(
+        `https://api.themoviedb.org/3/tv/${id.id}/watch/providers?api_key=36280866a80b71c69c0131b57e760ee2`,
+      );
       const data = await response.json();
+      const provider = await providerResponse.json();
+      data.provider = provider.results.KR;
 
       dispatch(getTvDetailSuccess(data));
     } catch (error) {

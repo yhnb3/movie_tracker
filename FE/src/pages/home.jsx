@@ -24,7 +24,7 @@ const sectionList = [
 ];
 
 const ContentListContainers = () => (
-  <div className="px-48">
+  <div className="px-72">
     <div className="flex h-80 w-full bg-blue-200">
       <div className="m-auto w-11/12 h-2/4">
         <div className="flex-wrap mb-10">

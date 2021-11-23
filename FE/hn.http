@@ -4,4 +4,4 @@
 
 # GET https://api.themoviedb.org/3/movie/popular?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=1
 
-GET https://api.themoviedb.org/3/search/multi?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=어벤져스&page=1&include_adult=false
+GET https://api.themoviedb.org/3/tv/94605/watch/providers?api_key=36280866a80b71c69c0131b57e760ee2

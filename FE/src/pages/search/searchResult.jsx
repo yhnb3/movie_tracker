@@ -76,7 +76,7 @@ export default function serachResult() {
   return (
     <div>
       <div className="flex border-b">
-        <div className="flex px-48">
+        <div className="flex px-72">
           <div className="flex">
             <FaSearch className="w-3 h-3 my-auto mx-3" />
           </div>

@@ -5,6 +5,7 @@ export const initialState = {
   loading: true,
   hasErrors: false,
   movie: {},
+  provider: [],
 };
 
 export const slice = createSlice({
@@ -40,8 +41,14 @@ export function fetchMovies(id) {
         `https://api.themoviedb.org/3/movie/${id.id}/videos?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
       );
 
+      const providerResponse = await fetch(
+        `https://api.themoviedb.org/3/movie/${id.id}/watch/providers?api_key=36280866a80b71c69c0131b57e760ee2`,
+      );
+
       const data = await detailResponse.json();
       data.video = await videoResponse.json();
+      const provider = await providerResponse.json();
+      data.provider = provider.results.KR;
 
       dispatch(getMovieDetailSuccess(data));
     } catch (error) {
