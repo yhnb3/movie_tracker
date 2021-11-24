@@ -43,7 +43,7 @@ export default function contentListContainer({
 
     return (
       <div>
-        <div className="flex flex-row my-3">
+        <div className="flex flex-row my-3 px-5">
           <div className="flex items-center">
             <p className="font-bold">{title}</p>
           </div>
@@ -57,7 +57,7 @@ export default function contentListContainer({
         </div>
 
         <div className="flex overflow-y-hidden overflow-x-auto">
-          <div className="flex flex-nowrap">
+          <div className="flex flex-nowrap h-list px-5">
             {contents.map((content) => (
               <Poster content={content} key={content.id} />
             ))}

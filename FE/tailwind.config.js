@@ -13,6 +13,7 @@ module.exports = {
       height: {
         img: '225px',
         poster: '570px',
+        list: '21rem',
       },
       inset: {
         '1/8': '12.5%',

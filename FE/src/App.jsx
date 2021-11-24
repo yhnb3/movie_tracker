@@ -6,6 +6,7 @@ import TVDetailContainer from './component/tvDetail/tvDetailConatiner';
 import {
   Home,
   Header,
+  Footer,
   MovieContainer,
   StreamingContainer,
   SearchResult,
@@ -46,6 +47,7 @@ class App extends Component {
           />
           <Route path="/search" element={<SearchResult />} />
         </Routes>
+        <Footer />
       </div>
     );
   }

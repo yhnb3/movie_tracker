@@ -16,9 +16,9 @@ const sectionList = [
     name: 'trending',
     title: '트렌딩',
     urls: {
-      오늘: 'https://api.themoviedb.org/3/trending/all/day?api_key=36280866a80b71c69c0131b57e760ee2',
+      오늘: 'https://api.themoviedb.org/3/trending/all/day?api_key=36280866a80b71c69c0131b57e760ee2&language=ko',
       이번주:
-        'https://api.themoviedb.org/3/trending/all/week?api_key=36280866a80b71c69c0131b57e760ee2',
+        'https://api.themoviedb.org/3/trending/all/week?api_key=36280866a80b71c69c0131b57e760ee2&language=ko',
     },
   },
 ];

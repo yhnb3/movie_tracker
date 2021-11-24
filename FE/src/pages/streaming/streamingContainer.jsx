@@ -59,12 +59,16 @@ export default function streamingContainer({ section }) {
     if (loading) return <p>loading....</p>;
     if (hasErrors) return <p>api error page</p>;
 
-    return data.map((element) => <Poster content={element} key={element.id} />);
+    return data.map((element) => (
+      <div className="h-list">
+        <Poster content={element} key={element.id} />
+      </div>
+    ));
   };
 
   return (
     <div>
-      <div className="grid grid-cols-5 px-48">{renderContents()}</div>
+      <div className="grid grid-cols-5 px-72">{renderContents()}</div>
     </div>
   );
 }

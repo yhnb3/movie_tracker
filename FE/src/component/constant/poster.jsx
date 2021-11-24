@@ -4,8 +4,17 @@ import { Link } from 'react-router-dom';
 import RateCircle from './rateCircle';
 
 export default function poster({ content }) {
+  const title = content.title || content.name;
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const pathUrl = content.title ? `/movie/${content.id}` : `/tv/${content.id}`;
+  const date = content.release_date || content.first_air_date;
+
+  const handlingDate = date
+    ? `${parseInt(date.substring(5, 7), 10)}월 ${parseInt(
+        date.substring(8, 10),
+        10,
+      )}, ${date.substring(0, 4)}`
+    : '미정';
 
   const rate = (score) => {
     let color = 'green';
@@ -35,6 +44,10 @@ export default function poster({ content }) {
         />
       </Link>
       {rate(content.vote_average)}
+      <div className="mt-4">
+        <p className="text-md font-bold">{title}</p>
+        <p className="text-sm text-gray-400">{handlingDate}</p>
+      </div>
     </div>
   );
 }
