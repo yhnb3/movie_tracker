@@ -39,9 +39,17 @@ export function fetchTv(id) {
       const providerResponse = await fetch(
         `https://api.themoviedb.org/3/tv/${id.id}/watch/providers?api_key=36280866a80b71c69c0131b57e760ee2`,
       );
+
+      const crewResponse = await fetch(
+        `https://api.themoviedb.org/3/tv/${id.id}/credits?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
+      );
+
       const data = await response.json();
       const provider = await providerResponse.json();
+      const crew = await crewResponse.json();
+
       data.provider = provider.results.KR;
+      data.crew = crew.cast;
 
       dispatch(getTvDetailSuccess(data));
     } catch (error) {

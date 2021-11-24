@@ -2,7 +2,7 @@ import React from 'react';
 import { AiFillGithub } from 'react-icons/ai';
 
 export default () => (
-  <div className="h-20 bg-blue-900 flex items-center mt-10">
+  <footer className="bottom-0 h-20 bg-blue-900 flex items-center mt-10">
     <div className="flex items-center mx-auto">
       <div>
         <a
@@ -14,5 +14,5 @@ export default () => (
         </a>
       </div>
     </div>
-  </div>
+  </footer>
 );

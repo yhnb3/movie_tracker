@@ -5,3 +5,4 @@ export { default as Footer } from './footer';
 export { default as MovieContainer } from './movies/movieContainer';
 export { default as StreamingContainer } from './streaming/streamingContainer';
 export { default as SearchResult } from './search/searchResult';
+export { default as SearchContent } from './search/searchContent';

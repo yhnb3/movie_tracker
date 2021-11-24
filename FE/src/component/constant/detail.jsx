@@ -5,12 +5,15 @@ import Youtube from './youtube';
 
 import RateCircle from './rateCircle';
 
+import SeasonSection from './seasonSection';
+
 export default function detail({ content }) {
   const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const title = content.title || content.name;
   const date = content.title ? content.release_date : content.first_air_date;
 
+  console.log(content);
   const providers = (() => {
     if (!content.provider) return [];
     const result = [];
@@ -49,6 +52,42 @@ export default function detail({ content }) {
       {date.substring(0, 4)}/{date.substring(5, 7)}/{date.substring(8, 10)}
     </span>
   );
+
+  const seasonsSection = () => (
+    <div className="mx-2">
+      <p className="text-xl font-bold">지난 시즌</p>
+      <div>
+        {content.seasons.map((element) => (
+          <SeasonSection content={element} key={element.id} />
+        ))}
+      </div>
+    </div>
+  );
+
+  const mediaSection = () => (
+    <div>
+      <p className="font-bold text-xl m-2">미디어</p>
+      {content.video.results.length > 0 ? (
+        <div className="flex flex-row m-2">
+          {content.video.results[0] ? (
+            <Youtube video={content.video.results[0]} />
+          ) : (
+            <></>
+          )}
+          {content.video.results[1] ? (
+            <Youtube video={content.video.results[1]} />
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
+        <div>
+          <p>관련 동영상이 존재하지 않습니다.</p>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div>
       <div className="relative h-poster">
@@ -107,13 +146,37 @@ export default function detail({ content }) {
           </div>
         </div>
       </div>
-      {content.title && content.video.results.length > 0 ? (
-        <div className="">
-          <Youtube video={content.video.results[0]} />
+      <div className="px-72">
+        <div className="my-5">
+          <p className="font-bold text-xl m-2">주요 출연진</p>
+          <div className="flex flex-row">
+            {content.crew.map((element) => {
+              if (element.order < 7) {
+                return (
+                  <div
+                    className="relative border border-gray-200 rounded-lg w-36 mx-2 shadow-md"
+                    key={element.order}
+                  >
+                    <img
+                      className="h-42 w-full object-cover object-top rounded-lg"
+                      src={`https://image.tmdb.org/t/p/original/${element.profile_path}`}
+                      alt={element.name}
+                    />
+                    <div className="p-1">
+                      <p className="font-bold">{element.name}</p>
+                      <p className="text-sm text-gray-400 whitespace-normal">
+                        {element.character}
+                      </p>
+                    </div>
+                  </div>
+                );
+              }
+              return <></>;
+            })}
+          </div>
         </div>
-      ) : (
-        <></>
-      )}
+        {content.title ? mediaSection() : seasonsSection()}
+      </div>
     </div>
   );
 }
