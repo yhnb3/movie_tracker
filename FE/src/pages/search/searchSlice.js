@@ -2,12 +2,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
-  page: 1,
-  endPage: 1,
   loading: false,
   isError: false,
-  data: [],
-  isMount: false,
+  currentSection: 'movie',
+  data: {
+    movie: {},
+    tv: {},
+    person: {},
+  },
 };
 
 export const slice = createSlice({
@@ -17,9 +19,6 @@ export const slice = createSlice({
     getSearchResult: (state) => {
       state.loading = true;
     },
-    getMoreSearchResult: (state, { payload }) => {
-      state.data = state.data.concat(payload.data);
-    },
     getSearchResultFailure: (state) => {
       state.loading = false;
       state.isError = true;
@@ -28,18 +27,10 @@ export const slice = createSlice({
       state.loading = false;
       state.isError = false;
       state.data = payload.data;
+      state.currentSection = payload.currentSection;
     },
-    setEndPage: (state, { payload }) => {
-      state.endPage = payload.endPage;
-    },
-    changePage: (state) => {
-      state.page += 1;
-    },
-    initPage: (state) => {
-      state.page = 1;
-    },
-    changeIsMount: (state) => {
-      state.isMount = true;
+    changeSection: (state, { payload }) => {
+      state.currentSection = payload.section;
     },
   },
 });
@@ -48,33 +39,66 @@ export const {
   getSearchResult,
   getSearchResultFailure,
   getSearchResultSuccess,
-  setEndPage,
-  initPage,
   changePage,
-  getMoreSearchResult,
+  changeSection,
+  setTotalPage,
   changeIsMount,
 } = slice.actions;
 
-export function fetchSearchResult(url) {
+export function fetchSearchResult(query) {
   return async (dispatch) => {
     dispatch(getSearchResult());
     try {
-      const response = await fetch(url);
-      const data = await response.json();
-      dispatch(setEndPage({ endPage: data.total_pages }));
-      dispatch(getSearchResultSuccess({ data: data.results }));
-      console.log(data.results);
+      const personResponse = await fetch(
+        `https://api.themoviedb.org/3/search/person?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=1&include_adult=false`,
+      );
+      const tvResponse = await fetch(
+        `https://api.themoviedb.org/3/search/tv?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=1&include_adult=false`,
+      );
+      const movieResponse = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=1&include_adult=false`,
+      );
+      const personData = await personResponse.json();
+      const tvData = await tvResponse.json();
+      const movieData = await movieResponse.json();
+
+      const currentSection =
+        (movieData.total_results && 'movie') ||
+        (tvData.total_results && 'tv') ||
+        (personData.total_results && 'person');
+      const data = {
+        movie: {
+          currentPage: 1,
+          totalPage: movieData.total_pages,
+          page: 1,
+          1: movieData.results,
+          totalResults: movieData.total_results,
+        },
+        tv: {
+          currentPage: 1,
+          totalPage: tvData.total_pages,
+          page: 1,
+          1: tvData.results,
+          totalResults: tvData.total_results,
+        },
+        person: {
+          currentPage: 1,
+          totalPage: personData.total_pages,
+          page: 1,
+          1: personData.results,
+          totalResults: personData.total_results,
+        },
+      };
+      dispatch(
+        getSearchResultSuccess({
+          currentSection,
+          data,
+        }),
+      );
     } catch (error) {
+      console.log(error);
       dispatch(getSearchResultFailure());
     }
-  };
-}
-export function fetchMoreSearchResult(url) {
-  return async (dispatch) => {
-    const response = await fetch(url);
-    const data = await response.json();
-    dispatch(getMoreSearchResult({ data: data.results }));
-    console.log(data.results);
   };
 }
 

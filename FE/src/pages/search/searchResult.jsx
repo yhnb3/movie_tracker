@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import qs from 'qs';
-import { debounce } from 'lodash';
 
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,9 +9,7 @@ import {
   search,
   fetchSearchResult,
   changePage,
-  initPage,
-  fetchMoreSearchResult,
-  changeIsMount,
+  changeSection,
 } from './searchSlice';
 import SearchContent from './searchContent';
 
@@ -21,44 +18,67 @@ export default function serachResult() {
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const { loading, isError, data, page, endPage, isMount } =
-    useSelector(search);
-  const url = `https://api.themoviedb.org/3/search/multi?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query.query}&page=${page}&include_adult=false`;
+  const { loading, isError, data, currentSection } = useSelector(search);
   const dispatch = useDispatch();
 
-  const handleScroll = (e) => {
-    if (
-      e.target.scrollingElement.scrollHeight ===
-      window.scrollY + window.innerHeight
-    ) {
-      dispatch(changePage());
-    }
+  const [isHover, setIsHover] = useState({
+    movie: false,
+    tv: false,
+    person: false,
+  });
+
+  const mouseOn = (section) => {
+    setIsHover({ ...isHover, [section]: true });
+  };
+  const mouseOut = (section) => {
+    setIsHover({ ...isHover, [section]: false });
   };
 
   useEffect(() => {
-    dispatch(initPage());
-    dispatch(fetchSearchResult(url));
+    dispatch(fetchSearchResult(query.query));
   }, [location]);
 
-  useEffect(() => {
-    if (!isMount) {
-      window.addEventListener(
-        'scroll',
-        debounce((e) => handleScroll(e), 15),
-      );
-      dispatch(changeIsMount());
-    }
-    if (page < endPage) {
-      dispatch(fetchMoreSearchResult(url));
-    }
-
-    return () => {
-      window.removeEventListener(
-        'scroll',
-        debounce((e) => handleScroll(e), 15),
-      );
-    };
-  }, [page]);
+  const sectionResulst = () => {
+    const results = [
+      { section: '영화', name: 'movie', count: data.movie.totalResults },
+      { section: 'TV 프로그램', name: 'tv', count: data.tv.totalResults },
+      { section: '인물', name: 'person', count: data.person.totalResults },
+    ];
+    return results.map((element) => (
+      <div
+        className={`flex justify-between px-4 py-2 ${
+          element.name === currentSection || isHover[element.name]
+            ? 'bg-gray-200'
+            : ''
+        }`}
+        role="button"
+        tabIndex={0}
+        onMouseOver={() => mouseOn(element.name)}
+        onFocus={() => mouseOn(element.name)}
+        onMouseOut={() => mouseOut(element.name)}
+        onBlur={() => mouseOut(element.name)}
+        onClick={() => dispatch(changeSection({ section: element.name }))}
+        onKeyDown={() => dispatch(changeSection({ section: element.name }))}
+      >
+        <span
+          className={`p-1 ${
+            element.name === currentSection ? 'font-bold' : ''
+          }`}
+        >
+          {element.section}
+        </span>
+        <span
+          className={`text-xs text-center align-middle my-1.5 rounded-md  ${
+            element.name === currentSection || isHover[element.name]
+              ? 'bg-white'
+              : 'bg-gray-200'
+          } w-6`}
+        >
+          {element.count}
+        </span>
+      </div>
+    ));
+  };
 
   const render = () => {
     if (loading) return <p>아직 로딩중</p>;
@@ -68,10 +88,12 @@ export default function serachResult() {
           데이터를 불러오는 중 오류가 생겼습니다. 잠시후에 다시 시도해보세요.
         </p>
       );
-    if (data.length === 0) return <p>검색 결과가 없습니다. </p>;
-    return data.map((element) => (
-      <SearchContent key={element.id} content={element} />
-    ));
+    if (data[currentSection].totalResults) {
+      return data[currentSection][data[currentSection].currentPage].map(
+        (element) => <SearchContent key={element.id} content={element} />,
+      );
+    }
+    return <p>왜 안되지</p>;
   };
   return (
     <div>
@@ -90,8 +112,22 @@ export default function serachResult() {
           </form>
         </div>
       </div>
-      <div className="px-48">
-        <div>{render()}</div>
+      <div className="flex flex-row px-72">
+        <div className="w-4/12 pt-10 pr-10">
+          <div className="rounded-lg border border-gray-200">
+            <div className="h-16 w-full bg-blue-400 rounded-t-lg flex items-center">
+              <div className="ml-4 text-white font-bold">Search Result</div>
+            </div>
+            <div className="mt-2 my-5">{sectionResulst()}</div>
+          </div>
+        </div>
+        <div className="w-8/12">
+          {currentSection === 'person' ? (
+            <p>아직 안만듬</p>
+          ) : (
+            <div>{render()}</div>
+          )}
+        </div>
       </div>
     </div>
   );

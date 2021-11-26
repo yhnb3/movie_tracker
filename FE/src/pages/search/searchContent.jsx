@@ -25,7 +25,7 @@ export default function searchContent({ content }) {
     return <></>;
   }
   return (
-    <div className="flex mt-10 border-gray-300 border rounded-lg">
+    <div className="flex mt-10 border-gray-300 border rounded-lg w-6/8">
       <Link to={pathUrl}>
         <img
           className="rounded-l-lg object-cover w-img h-full"
