@@ -2,8 +2,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
+  isMount: false,
   loading: false,
   isError: false,
+  currentPage: 1,
   currentSection: 'movie',
   data: {
     movie: {},
@@ -29,8 +31,20 @@ export const slice = createSlice({
       state.data = payload.data;
       state.currentSection = payload.currentSection;
     },
+    getMoreSearchResultSuccess: (state, { payload }) => {
+      state.loading = false;
+      state.isError = false;
+      state.data[payload.section][payload.page] = payload.data;
+    },
     changeSection: (state, { payload }) => {
       state.currentSection = payload.section;
+      state.currentPage = 1;
+    },
+    changePage: (state, { payload }) => {
+      state.currentPage = payload.page;
+    },
+    changeIsMount: (state) => {
+      state.isMount = true;
     },
   },
 });
@@ -39,6 +53,7 @@ export const {
   getSearchResult,
   getSearchResultFailure,
   getSearchResultSuccess,
+  getMoreSearchResultSuccess,
   changePage,
   changeSection,
   setTotalPage,
@@ -94,6 +109,24 @@ export function fetchSearchResult(query) {
           currentSection,
           data,
         }),
+      );
+    } catch (error) {
+      console.log(error);
+      dispatch(getSearchResultFailure());
+    }
+  };
+}
+
+export function fetchMoreSearchResult({ query, section, page }) {
+  return async (dispatch) => {
+    dispatch(getSearchResult());
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/search/${section}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=${page}&include_adult=false`,
+      );
+      const data = await response.json();
+      dispatch(
+        getMoreSearchResultSuccess({ section, page, data: data.results }),
       );
     } catch (error) {
       console.log(error);

@@ -8,17 +8,21 @@ import { FaSearch } from 'react-icons/fa';
 import {
   search,
   fetchSearchResult,
+  fetchMoreSearchResult,
   changePage,
   changeSection,
+  changeIsMount,
 } from './searchSlice';
 import SearchContent from './searchContent';
+import Pagination from './pagination';
 
 export default function serachResult() {
   const location = useLocation();
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const { loading, isError, data, currentSection } = useSelector(search);
+  const { loading, isError, data, currentSection, isMount, currentPage } =
+    useSelector(search);
   const dispatch = useDispatch();
 
   const [isHover, setIsHover] = useState({
@@ -27,16 +31,27 @@ export default function serachResult() {
     person: false,
   });
 
+  useEffect(() => {
+    if (!isMount) {
+      dispatch(fetchSearchResult(query.query));
+      dispatch(changeIsMount());
+    } else if (data[currentSection][currentPage] === undefined) {
+      dispatch(
+        fetchMoreSearchResult({
+          section: currentSection,
+          query: query.query,
+          page: currentPage,
+        }),
+      );
+    }
+  }, [location, currentPage]);
+
   const mouseOn = (section) => {
     setIsHover({ ...isHover, [section]: true });
   };
   const mouseOut = (section) => {
     setIsHover({ ...isHover, [section]: false });
   };
-
-  useEffect(() => {
-    dispatch(fetchSearchResult(query.query));
-  }, [location]);
 
   const sectionResulst = () => {
     const results = [
@@ -46,6 +61,7 @@ export default function serachResult() {
     ];
     return results.map((element) => (
       <div
+        key={element.name}
         className={`flex justify-between px-4 py-2 ${
           element.name === currentSection || isHover[element.name]
             ? 'bg-gray-200'
@@ -88,9 +104,28 @@ export default function serachResult() {
           데이터를 불러오는 중 오류가 생겼습니다. 잠시후에 다시 시도해보세요.
         </p>
       );
-    if (data[currentSection].totalResults) {
-      return data[currentSection][data[currentSection].currentPage].map(
-        (element) => <SearchContent key={element.id} content={element} />,
+    if (
+      data[currentSection].totalResults &&
+      data[currentSection][currentPage]
+    ) {
+      return (
+        <div>
+          {data[currentSection][currentPage].map((element) => (
+            <SearchContent key={element.id} content={element} />
+          ))}
+          {data[currentSection].totalPage > 1 ? (
+            <Pagination
+              page={currentPage}
+              totalPage={data[currentSection].totalPage}
+              section={currentSection}
+              onChangePage={(newPage) =>
+                dispatch(changePage({ section: currentSection, page: newPage }))
+              }
+            />
+          ) : (
+            <></>
+          )}
+        </div>
       );
     }
     return <p>왜 안되지</p>;
