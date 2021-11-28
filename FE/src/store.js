@@ -3,6 +3,7 @@ import {
   contentListReducer,
   movieDetailReducer,
   tvDetailReducer,
+  personDetailReducer,
 } from './component/index';
 
 import movieReducer from './pages/contentSlice';
@@ -13,6 +14,7 @@ export default configureStore({
     contentList: contentListReducer,
     movieDetail: movieDetailReducer,
     tvDetail: tvDetailReducer,
+    personDetail: personDetailReducer,
     content: movieReducer,
     search: searchReducer,
   },

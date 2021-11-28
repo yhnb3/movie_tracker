@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { MovieDetailContainer, TvDetailContainer } from './component/index';
+import {
+  MovieDetailContainer,
+  PersonDetailContainer,
+  TvDetailContainer,
+} from './component/index';
 import TVDetailContainer from './component/tvDetail/tvDetailConatiner';
 
 import {
@@ -15,7 +19,7 @@ import {
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="relative min-h-screen">
         <Header />
         <Routes>
           <Route index path="/" element={<Home />} />
@@ -45,6 +49,9 @@ class App extends Component {
             path="/tv/top_rated"
             element={<StreamingContainer section="top_rated" />}
           />
+          <Route path="person" element={<PersonDetailContainer />}>
+            <Route path=":id" element={<PersonDetailContainer />} />
+          </Route>
           <Route path="/search" element={<SearchResult />} />
         </Routes>
         <Footer />

@@ -21,5 +21,5 @@ export default function MovieDetailContainer() {
     return <Detail content={movie} />;
   };
 
-  return <div>{renderMovie()}</div>;
+  return <div className="pb-28">{renderMovie()}</div>;
 }

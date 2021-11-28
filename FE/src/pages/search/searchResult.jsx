@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import qs from 'qs';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
+import { BsDot } from 'react-icons/bs';
 
 import {
   search,
@@ -16,7 +17,7 @@ import {
 import SearchContent from './searchContent';
 import Pagination from './pagination';
 
-export default function serachResult() {
+export default function searchResult() {
   const location = useLocation();
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -96,7 +97,7 @@ export default function serachResult() {
     ));
   };
 
-  const render = () => {
+  const contentResult = () => {
     if (loading) return <p>아직 로딩중</p>;
     if (isError)
       return (
@@ -130,8 +131,82 @@ export default function serachResult() {
     }
     return <p>왜 안되지</p>;
   };
+  const personResult = () => {
+    if (loading) return <p>아직 로딩중</p>;
+    if (isError)
+      return (
+        <p>
+          데이터를 불러오는 중 오류가 생겼습니다. 잠시후에 다시 시도해보세요.
+        </p>
+      );
+    if (
+      data[currentSection].totalResults &&
+      data[currentSection][currentPage]
+    ) {
+      return (
+        <div className="mt-10">
+          {data[currentSection][currentPage].map((element) => (
+            <div className="flex flex-row mt-5 h-full" key={element.id}>
+              <Link to={`/person/${element.id}`}>
+                <img
+                  className="w-20 h-20 object-cover object-center rounded-md"
+                  src={`https://image.tmdb.org/t/p/w300/${element.profile_path}`}
+                  alt={element.name}
+                />
+              </Link>
+
+              <div className="flex flex-col justify-center ml-5">
+                <p className="text-xl font-bold">{element.name}</p>
+                <div className="flex flex-row">
+                  <p>{element.known_for_department}</p>
+                  <div className="flex items-center">
+                    <BsDot />
+                  </div>
+                  {element.known_for.map((content, idx) => {
+                    const title = content.title || content.name;
+                    return (
+                      <Link
+                        to={
+                          content.title
+                            ? `/movie/${content.id}`
+                            : `/tv/${content.id}`
+                        }
+                      >
+                        {idx === element.length - 1 ? (
+                          <p>{title}</p>
+                        ) : (
+                          <p>
+                            {title}
+                            {', '}
+                          </p>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ))}
+          {data[currentSection].totalPage > 1 ? (
+            <Pagination
+              page={currentPage}
+              totalPage={data[currentSection].totalPage}
+              section={currentSection}
+              onChangePage={(newPage) =>
+                dispatch(changePage({ section: currentSection, page: newPage }))
+              }
+            />
+          ) : (
+            <></>
+          )}
+        </div>
+      );
+    }
+    return <p>오류가 발생했습니다. 다시 시도해보세요.</p>;
+  };
+
   return (
-    <div>
+    <div className="pb-28">
       <div className="flex border-b">
         <div className="flex px-72">
           <div className="flex">
@@ -158,9 +233,9 @@ export default function serachResult() {
         </div>
         <div className="w-8/12">
           {currentSection === 'person' ? (
-            <p>아직 안만듬</p>
+            <div>{personResult()}</div>
           ) : (
-            <div>{render()}</div>
+            <div>{contentResult()}</div>
           )}
         </div>
       </div>
