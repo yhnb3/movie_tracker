@@ -165,22 +165,24 @@ export default function searchResult() {
                   {element.known_for.map((content, idx) => {
                     const title = content.title || content.name;
                     return (
-                      <Link
-                        to={
-                          content.title
-                            ? `/movie/${content.id}`
-                            : `/tv/${content.id}`
-                        }
-                      >
-                        {idx === element.length - 1 ? (
-                          <p>{title}</p>
-                        ) : (
-                          <p>
-                            {title}
-                            {', '}
-                          </p>
-                        )}
-                      </Link>
+                      <div key={title}>
+                        <Link
+                          to={
+                            content.title
+                              ? `/movie/${content.id}`
+                              : `/tv/${content.id}`
+                          }
+                        >
+                          {idx === element.known_for.length - 1 ? (
+                            <p>{title}</p>
+                          ) : (
+                            <p className="mr-2">
+                              {title}
+                              {', '}
+                            </p>
+                          )}
+                        </Link>
+                      </div>
                     );
                   })}
                 </div>

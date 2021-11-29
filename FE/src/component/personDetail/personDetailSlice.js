@@ -37,10 +37,14 @@ export function fetchPerson(id) {
     dispatch(getPersonDetail());
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/person/${id}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
+        `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
+      const creditResponse = await fetch(
+        `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
+      );
+      const creditData = await creditResponse.json();
       const data = await response.json();
-      console.log(data);
+      data.credit = creditData;
       dispatch(getPersonDetailSuccess(data));
     } catch (error) {
       dispatch(getPersonDetailFailure());

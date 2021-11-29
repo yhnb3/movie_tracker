@@ -19,6 +19,10 @@ module.exports = {
         '1/8': '12.5%',
       },
     },
+    minWidth: {
+      personImg: '300px',
+      posterImg: '130px',
+    },
   },
   variants: {
     extend: {},
