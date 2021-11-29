@@ -35,18 +35,18 @@ export function fetchMovies(id) {
     dispatch(getMovieDetail());
     try {
       const detailResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${id.id}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
+        `https://api.themoviedb.org/3/movie/${id.id}?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
       const videoResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${id.id}/videos?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
+        `https://api.themoviedb.org/3/movie/${id.id}/videos?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
 
       const providerResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${id.id}/watch/providers?api_key=36280866a80b71c69c0131b57e760ee2`,
+        `https://api.themoviedb.org/3/movie/${id.id}/watch/providers?api_key=${process.env.REACT_APP_API_CODE}`,
       );
 
       const crewResponse = await fetch(
-        `https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=36280866a80b71c69c0131b57e760ee2&language=ko`,
+        `https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
 
       const data = await detailResponse.json();

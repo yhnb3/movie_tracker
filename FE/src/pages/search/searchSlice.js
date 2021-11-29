@@ -65,13 +65,13 @@ export function fetchSearchResult(query) {
     dispatch(getSearchResult());
     try {
       const personResponse = await fetch(
-        `https://api.themoviedb.org/3/search/person?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=1&include_adult=false`,
+        `https://api.themoviedb.org/3/search/person?api_key=${process.env.REACT_APP_API_CODE}&language=ko&query=${query}&page=1&include_adult=false`,
       );
       const tvResponse = await fetch(
-        `https://api.themoviedb.org/3/search/tv?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=1&include_adult=false`,
+        `https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_API_CODE}&language=ko&query=${query}&page=1&include_adult=false`,
       );
       const movieResponse = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&query=${query}&page=1&include_adult=false`,
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_CODE}&language=ko&query=${query}&page=1&include_adult=false`,
       );
       const personData = await personResponse.json();
       const tvData = await tvResponse.json();

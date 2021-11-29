@@ -16,7 +16,6 @@ export default function personDetailContainer() {
   }, [location]);
 
   const render = () => {
-    console.log(process.env);
     if (loading) return <p>로딩 중....</p>;
     if (isError) return <p>데이터를 불러오는 중에 오류가 발생하였습니다.</p>;
 

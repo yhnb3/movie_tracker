@@ -14,11 +14,11 @@ export default function knowFor({ person }) {
   const render = () =>
     sortedMovies.map((content) => (
       <div
-        className="relative rounded-md pr-4"
+        className="relative rounded-md mr-6 shadow-xl my-2 border border-gray-200"
         key={content.title || content.name}
       >
         <img
-          className="object-cover rounded-md min-w-posterImg"
+          className="h-48 object-cover rounded-md min-w-posterImg"
           src={`https://image.tmdb.org/t/p/w300/${content.poster_path}`}
           alt={content.title || content.name}
         />

@@ -7,18 +7,16 @@ const sectionList = [
     name: 'populars',
     title: "What's popular?",
     urls: {
-      Movie:
-        'https://api.themoviedb.org/3/movie/popular?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=1',
-      Tv: 'https://api.themoviedb.org/3/tv/popular?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=1',
+      Movie: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      Tv: `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
     },
   },
   {
     name: 'trending',
     title: '트렌딩',
     urls: {
-      오늘: 'https://api.themoviedb.org/3/trending/all/day?api_key=36280866a80b71c69c0131b57e760ee2&language=ko',
-      이번주:
-        'https://api.themoviedb.org/3/trending/all/week?api_key=36280866a80b71c69c0131b57e760ee2&language=ko',
+      오늘: `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
+      이번주: `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
     },
   },
 ];

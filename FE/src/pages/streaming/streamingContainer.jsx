@@ -17,7 +17,7 @@ export default function streamingContainer({ section }) {
   const location = useLocation();
 
   const { loading, hasErrors, data, page, isMount } = useSelector(content);
-  const url = `https://api.themoviedb.org/3/tv/${section}?api_key=36280866a80b71c69c0131b57e760ee2&language=ko&page=${page}`;
+  const url = `https://api.themoviedb.org/3/tv/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
 
   const dispatch = useDispatch();
 
