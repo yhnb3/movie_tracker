@@ -42,9 +42,16 @@ export function fetchPerson(id) {
       const creditResponse = await fetch(
         `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
+      const socialResponse = await fetch(
+        `https://api.themoviedb.org/3/person/${id}/external_ids?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
+      );
+
       const creditData = await creditResponse.json();
+      const socialData = await socialResponse.json();
       const data = await response.json();
+
       data.credit = creditData;
+      data.social = socialData;
       dispatch(getPersonDetailSuccess(data));
     } catch (error) {
       dispatch(getPersonDetailFailure());

@@ -10,7 +10,6 @@ export default function knowFor({ person }) {
     .sort((a, b) => b.vote_count - a.vote_count)
     .slice(0, 8);
 
-  console.log(sortedMovies);
   const render = () =>
     sortedMovies.map((content) => (
       <div

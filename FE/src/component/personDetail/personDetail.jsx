@@ -1,5 +1,5 @@
 import React from 'react';
-import { KnownFor, PersonHistory } from './section';
+import { KnownFor, PersonHistory, PersonInfo } from './section';
 
 export default function personDetail({ person }) {
   console.log(person);
@@ -11,6 +11,7 @@ export default function personDetail({ person }) {
           src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
           alt={person.name}
         />
+        <PersonInfo person={person} />
       </div>
       <div className="flex flex-col pl-10 w-8/12">
         <p className="text-3xl font-bold pb-4">{person.name}</p>
