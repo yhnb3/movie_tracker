@@ -6,6 +6,7 @@ import Youtube from './youtube';
 import RateCircle from './rateCircle';
 
 import SeasonSection from './seasonSection';
+import { RecomendationSection } from './section';
 
 export default function detail({ content }) {
   const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
@@ -176,6 +177,7 @@ export default function detail({ content }) {
           </div>
         </div>
         {content.title ? mediaSection() : seasonsSection()}
+        <RecomendationSection contents={content.recomend} />
       </div>
     </div>
   );

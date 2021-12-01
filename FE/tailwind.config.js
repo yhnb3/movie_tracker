@@ -9,11 +9,13 @@ module.exports = {
     extend: {
       width: {
         img: '150px',
+        sm_backdrop: '250px',
       },
       height: {
         img: '225px',
         poster: '570px',
         list: '21rem',
+        sm_backdrop: '141px',
       },
       inset: {
         '1/8': '12.5%',
