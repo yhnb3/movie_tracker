@@ -44,12 +44,18 @@ export function fetchTv(id) {
         `https://api.themoviedb.org/3/tv/${id.id}/credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
 
+      const recommendationResponse = await fetch(
+        `https://api.themoviedb.org/3/tv/${id.id}/recommendations?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      );
+
       const data = await response.json();
       const provider = await providerResponse.json();
       const crew = await crewResponse.json();
+      const recommendation = await recommendationResponse.json();
 
       data.provider = provider.results.KR;
       data.crew = crew.cast;
+      data.recommend = recommendation.results;
 
       dispatch(getTvDetailSuccess(data));
     } catch (error) {

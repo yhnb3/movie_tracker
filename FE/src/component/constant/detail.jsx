@@ -71,12 +71,12 @@ export default function detail({ content }) {
       {content.video.results.length > 0 ? (
         <div className="flex flex-row m-2">
           {content.video.results[0] ? (
-            <Youtube video={content.video.results[0]} />
+            <Youtube video={content.video.results[0]} key={0} />
           ) : (
             <></>
           )}
           {content.video.results[1] ? (
-            <Youtube video={content.video.results[1]} />
+            <Youtube video={content.video.results[1]} kye={1} />
           ) : (
             <></>
           )}
@@ -156,7 +156,7 @@ export default function detail({ content }) {
                 return (
                   <div
                     className="relative border border-gray-200 rounded-lg w-36 mx-2 shadow-md"
-                    key={element.order}
+                    key={element.id}
                   >
                     <img
                       className="h-42 w-full object-cover object-top rounded-lg"
@@ -177,7 +177,7 @@ export default function detail({ content }) {
           </div>
         </div>
         {content.title ? mediaSection() : seasonsSection()}
-        <RecomendationSection contents={content.recomend} />
+        <RecomendationSection contents={content.recommend} />
       </div>
     </div>
   );

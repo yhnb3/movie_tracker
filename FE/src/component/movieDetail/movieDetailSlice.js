@@ -48,7 +48,7 @@ export function fetchMovies(id) {
       const crewResponse = await fetch(
         `https://api.themoviedb.org/3/movie/${id.id}/credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
       );
-      const recomendationResponse = await fetch(
+      const recommendationResponse = await fetch(
         `https://api.themoviedb.org/3/movie/${id.id}/recommendations?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
       );
 
@@ -56,10 +56,10 @@ export function fetchMovies(id) {
       data.video = await videoResponse.json();
       const provider = await providerResponse.json();
       const crew = await crewResponse.json();
-      const recomend = await recomendationResponse.json();
+      const recommend = await recommendationResponse.json();
       data.provider = provider.results.KR;
       data.crew = crew.cast;
-      data.recomend = recomend.results;
+      data.recommend = recommend.results;
 
       dispatch(getMovieDetailSuccess(data));
     } catch (error) {
