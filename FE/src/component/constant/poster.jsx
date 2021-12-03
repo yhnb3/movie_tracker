@@ -35,7 +35,7 @@ export default function poster({ content }) {
   };
 
   return (
-    <div className="relative h-img w-img m-4 flex-col">
+    <div className="relative h-img w-img top-0 flex-col whitespace-normal">
       <Link to={pathUrl}>
         <img
           className="rounded-lg object-cover w-img h-full mx-auto"

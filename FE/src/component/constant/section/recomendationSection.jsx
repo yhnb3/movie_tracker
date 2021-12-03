@@ -11,7 +11,7 @@ export default function recomendationSection({ contents }) {
           const section = content.title ? 'movie' : 'tv';
           return (
             <div
-              className={`inline-block pr-${padding} rounded-md`}
+              className={`inline-flex pr-${padding} rounded-md`}
               key={content.id}
             >
               <Link to={`/${section}/${content.id}`}>

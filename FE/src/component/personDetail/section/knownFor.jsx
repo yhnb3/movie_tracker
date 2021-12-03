@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function knowFor({ person }) {
   const movies =
@@ -12,22 +13,25 @@ export default function knowFor({ person }) {
 
   const render = () =>
     sortedMovies.map((content) => (
-      <div
-        className="relative rounded-md mr-6 shadow-xl my-2 border border-gray-200"
-        key={content.title || content.name}
-      >
-        <img
-          className="h-48 object-cover rounded-md min-w-posterImg"
-          src={`https://image.tmdb.org/t/p/w300/${content.poster_path}`}
-          alt={content.title || content.name}
-        />
+      <div className="inline-flex" key={content.title || content.name}>
+        <Link to={`/${content.title ? 'movie' : 'tv'}/${content.id}`}>
+          <div className="relative rounded-md mr-6 shadow-xl my-2 border border-gray-200">
+            <img
+              className="h-48 object-cover rounded-md min-w-posterImg"
+              src={`https://image.tmdb.org/t/p/w300/${content.poster_path}`}
+              alt={content.title || content.name}
+            />
+          </div>
+        </Link>
       </div>
     ));
 
   return (
-    <div className="flex flex-col flex-nowrap overflow-y-hidden overflow-x-auto">
+    <div className="flex flex-col">
       <p className="text-xl font-bold py-2">유명 분야</p>
-      <div className="flex">{render()}</div>
+      <div className="overflow-y-hidden overflow-x-auto whitespace-nowrap">
+        {render()}
+      </div>
     </div>
   );
 }
