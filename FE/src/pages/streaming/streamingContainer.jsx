@@ -68,7 +68,9 @@ export default function streamingContainer({ section }) {
 
   return (
     <div>
-      <div className="grid grid-cols-5 px-72 pb-28">{renderContents()}</div>
+      <div className="grid grid-cols-5 px-72 pt-20 pb-28">
+        {renderContents()}
+      </div>
     </div>
   );
 }

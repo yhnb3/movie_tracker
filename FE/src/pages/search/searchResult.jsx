@@ -208,7 +208,7 @@ export default function searchResult() {
   };
 
   return (
-    <div className="pb-28">
+    <div className="pb-28 pt-20">
       <div className="flex border-b">
         <div className="flex px-72">
           <div className="flex">

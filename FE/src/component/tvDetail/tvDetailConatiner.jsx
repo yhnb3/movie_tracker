@@ -21,5 +21,5 @@ export default function TVDetailContainer() {
     return <Detail content={tv} />;
   };
 
-  return <div className="pb-28">{renderTv()}</div>;
+  return <div className="pt-20 pb-28">{renderTv()}</div>;
 }

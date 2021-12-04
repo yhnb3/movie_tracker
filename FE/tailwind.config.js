@@ -7,6 +7,34 @@ module.exports = {
       scorll: '0 0 auto',
     },
     extend: {
+      animation: {
+        'show-header': 'show-header 0.3s ease-out',
+        'hide-header': 'hide-header 0.3s ease-out',
+      },
+      keyframes: {
+        'show-header': {
+          '0%': {
+            transform: 'translateY(-100%)',
+          },
+          '50%': {
+            transform: 'translateY(-50%)',
+          },
+          '100%': {
+            transform: 'translateY(0%)',
+          },
+        },
+        'hide-header': {
+          '0%': {
+            transform: 'translateY(100%)',
+          },
+          '50%': {
+            transform: 'translateY(50%)',
+          },
+          '100%': {
+            transform: 'translateY(0%)',
+          },
+        },
+      },
       width: {
         img: '150px',
         sm_backdrop: '250px',

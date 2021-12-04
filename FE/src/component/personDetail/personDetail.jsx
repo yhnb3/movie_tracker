@@ -4,7 +4,7 @@ import { KnownFor, PersonHistory, PersonInfo } from './section';
 export default function personDetail({ person }) {
   console.log(person);
   return (
-    <div className="px-72 pb-28 flex flex-row mt-10">
+    <div className="px-72 pt-20 pb-28 flex flex-row mt-10">
       <div className="flex flex-col min-w-personImg ">
         <img
           className="w-80 object-cover rounded-md shadow-lg"

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -7,6 +8,8 @@ import { DropMenu } from '../component/index';
 export default function header() {
   const [movieIsVisible, setMovieIsVisible] = useState(false);
   const [tvIsVisible, setTvIsVisible] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
 
   const showMenu = (target) => {
     if (target === 'movie') {
@@ -23,8 +26,30 @@ export default function header() {
       setTvIsVisible(false);
     }
   };
+  const handlingHeader = () => {
+    if (window.scrollY >= 100 && window.scrollY > scrollY && headerVisible) {
+      setHeaderVisible(!headerVisible);
+    } else if (window.scrollY < scrollY && !headerVisible) {
+      setHeaderVisible(!headerVisible);
+    }
+    setScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handlingHeader);
+    return () => window.removeEventListener('scroll', handlingHeader);
+  });
+
   return (
-    <header className="h-20 w-full bg-blue-900">
+    <header
+      className={`h-20 w-full bg-blue-900 fixed z-50 ${
+        window.scrollY >= 100
+          ? headerVisible
+            ? 'animate-show-header top-0'
+            : 'animate-hide-header -top-20'
+          : 'top-0'
+      }`}
+    >
       <div className="flex h-full px-72 items-center">
         <Link to="/">
           <button className="mr-12 font-bold text-white text-xl" type="button">

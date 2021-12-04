@@ -64,5 +64,5 @@ const ContentListContainers = () => (
 );
 
 export default function home() {
-  return <div className="pb-28">{ContentListContainers()}</div>;
+  return <div className="pt-20 pb-28">{ContentListContainers()}</div>;
 }
