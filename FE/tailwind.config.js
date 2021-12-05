@@ -1,4 +1,5 @@
 /* eslint-disable global-require */
+
 module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
@@ -55,7 +56,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      scrollbar: ['rounded'],
+    },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [require('@tailwindcss/line-clamp'), require('tailwind-scrollbar')],
 };

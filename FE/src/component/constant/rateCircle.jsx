@@ -35,10 +35,10 @@ export default function rateCircle({ rate, color, times }) {
         strokeLinecap="round"
       />
       <text
-        x={8 * times}
-        y={26 * times}
+        x={rate < 10 ? 8 * times : 5 * times}
+        y={rate < 10 ? 26 * times : 24 * times}
         fill="white"
-        fontSize={17 * times}
+        fontSize={rate < 10 ? 17 * times : 13 * times}
         fontFamily="'맑은 고딕', cursive"
       >
         {rate * 10}

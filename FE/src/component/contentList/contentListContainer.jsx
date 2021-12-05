@@ -56,7 +56,7 @@ export default function contentListContainer({
           />
         </div>
 
-        <div className="overflow-y-hidden overflow-x-auto whitespace-nowrap h-list">
+        <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap h-list ">
           {contents.map((content) => (
             <div className="inline-flex px-5 ">
               <Poster content={content} key={content.id} />

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Youtube from './youtube';
 
@@ -158,11 +159,13 @@ export default function detail({ content }) {
                     className="relative border border-gray-200 rounded-lg w-36 mx-2 shadow-md"
                     key={element.id}
                   >
-                    <img
-                      className="h-42 w-full object-cover object-top rounded-lg"
-                      src={`https://image.tmdb.org/t/p/original/${element.profile_path}`}
-                      alt={element.name}
-                    />
+                    <Link to={`/person/${element.id}`}>
+                      <img
+                        className="h-42 w-full object-cover object-top rounded-lg"
+                        src={`https://image.tmdb.org/t/p/original/${element.profile_path}`}
+                        alt={element.name}
+                      />
+                    </Link>
                     <div className="p-1">
                       <p className="font-bold">{element.name}</p>
                       <p className="text-sm text-gray-400 whitespace-normal">

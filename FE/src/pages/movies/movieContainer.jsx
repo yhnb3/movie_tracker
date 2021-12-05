@@ -68,7 +68,7 @@ export default function movieContainer({ section }) {
 
   return (
     <div>
-      <div className="grid grid-cols-5 px-72 pt-20 py-28">
+      <div className="grid grid-cols-5 px-72 pt-30 py-28">
         {renderContents()}
       </div>
     </div>

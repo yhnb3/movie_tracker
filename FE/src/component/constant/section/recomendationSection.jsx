@@ -5,13 +5,13 @@ export default function recomendationSection({ contents }) {
   return (
     <div>
       <p className="text-xl font-bold my-5">추천</p>
-      <div className="overflow-y-hidden overflow-x-auto whitespace-nowrap">
+      <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap">
         {contents.map((content, idx) => {
           const padding = idx !== contents.length - 1 ? 4 : 0;
           const section = content.title ? 'movie' : 'tv';
           return (
             <div
-              className={`inline-flex pr-${padding} rounded-md`}
+              className={`inline-flex pr-${padding} rounded-md flex flex-col`}
               key={content.id}
             >
               <Link to={`/${section}/${content.id}`}>
@@ -21,7 +21,7 @@ export default function recomendationSection({ contents }) {
                   alt={content.name || content.title}
                 />
               </Link>
-              <div className="flex justify-between">
+              <div className="flex justify-between mb-2">
                 <p className="text-sm">{content.name || content.title}</p>
                 <p>{`${Math.round(content.vote_average * 10)}%`}</p>
               </div>
