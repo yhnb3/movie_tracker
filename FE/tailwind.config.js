@@ -49,6 +49,11 @@ module.exports = {
       inset: {
         '1/8': '12.5%',
       },
+      colors: {
+        whiteOp100: 'rgb(255 255 255 / 100%)',
+        whiteOp50: 'rgb(255 255 255 / 50%)',
+        whiteOp0: 'rgb(255 255 255 / 0%)',
+      },
     },
     minWidth: {
       personImg: '300px',
