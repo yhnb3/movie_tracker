@@ -7,13 +7,13 @@ export default function categoryBtn({
   currentCategory,
 }) {
   return (
-    <div className="flex mx-2 rounded-full border-1 border-black">
+    <div className="flex mx-2 rounded-full border border-black">
       {categories.map((category) => {
         if (currentCategory === category) {
           return (
             <button
               key={category}
-              className="rounded-full border-2 border-blue-300 p-1 mx-1"
+              className="rounded-full bg-gray-500 text-white px-5 py-1"
               onClick={() => categoryChange({ section, category })}
               type="button"
             >
@@ -23,7 +23,7 @@ export default function categoryBtn({
         }
         return (
           <button
-            className="p-1 mx-1"
+            className="px-5"
             key={category}
             onClick={() => categoryChange({ section, category })}
             type="button"

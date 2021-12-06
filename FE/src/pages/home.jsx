@@ -7,8 +7,8 @@ const sectionList = [
     name: 'populars',
     title: "What's popular?",
     urls: {
-      Movie: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
-      Tv: `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      상영중: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      TV: `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
     },
   },
   {
