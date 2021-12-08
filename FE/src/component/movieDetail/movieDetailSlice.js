@@ -57,6 +57,7 @@ export function fetchMovies(id) {
       const provider = await providerResponse.json();
       const crew = await crewResponse.json();
       const recommend = await recommendationResponse.json();
+
       data.provider = provider.results.KR;
       data.crew = crew.cast;
       data.recommend = recommend.results;
