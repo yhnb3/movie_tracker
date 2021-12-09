@@ -36,6 +36,7 @@ module.exports = {
         },
       },
       width: {
+        person: '235px',
         img: '150px',
         sm_backdrop: '250px',
       },
