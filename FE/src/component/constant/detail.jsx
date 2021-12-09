@@ -127,10 +127,10 @@ export default function detail({ content }) {
               <p className="max-h-20 overflow-ellipsis overflow-hidden text-sm line-clamp-4 my-2">
                 {content.overview || '해당 언어의 줄거리가 존재하지 않습니다.'}
               </p>
-              <div className="py-3 flex flex-row my-2">
+              <div className="flex flex-row my-2">
                 {providers.map((element) => (
                   <img
-                    className="h-10 rounded-md m-2"
+                    className="h-14 rounded-md mx-2"
                     key={element.id}
                     src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
                     alt=""
