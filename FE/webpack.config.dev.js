@@ -30,19 +30,7 @@ module.exports = {
       {
         test: /.css?$/,
         exclude: [],
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                parser: 'postcss-js',
-              },
-              execute: true,
-            },
-          },
-        ],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
