@@ -12,12 +12,11 @@ export default function header() {
   const [headerVisible, setHeaderVisible] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const showMenu = (target) => {
-    console.log(target);
     if (target === 'movie') {
       setMovieIsVisible(true);
     } else if (target === 'tv') {
       setTvIsVisible(true);
-    } else {
+    } else if (target === 'person') {
       setPersonIsVisible(true);
     }
   };
@@ -27,7 +26,7 @@ export default function header() {
       setMovieIsVisible(false);
     } else if (target === 'tv') {
       setTvIsVisible(false);
-    } else {
+    } else if (target === 'person') {
       setPersonIsVisible(false);
     }
   };
@@ -65,10 +64,10 @@ export default function header() {
         <div
           className="flex h-full items-center"
           data-name="movie"
-          onMouseOver={(e) => showMenu(e.target.dataset.name)}
-          onFocus={(e) => showMenu(e.target.dataset.name)}
-          onMouseOut={(e) => hideMenu(e.target.dataset.name)}
-          onBlur={(e) => hideMenu(e.target.dataset.name)}
+          onMouseOver={() => showMenu('movie')}
+          onFocus={() => showMenu('movie')}
+          onMouseOut={() => hideMenu('movie')}
+          onBlur={() => hideMenu('movie')}
         >
           <button className="mr-12 font-bold text-white text-xl" type="button">
             영화
@@ -106,10 +105,10 @@ export default function header() {
         <div
           className="flex h-full items-center"
           data-name="person"
-          onMouseOver={(e) => showMenu(e.target.dataset.name)}
-          onFocus={(e) => showMenu(e.target.dataset.name)}
-          onMouseOut={(e) => hideMenu(e.target.dataset.name)}
-          onBlur={(e) => hideMenu(e.target.dataset.name)}
+          onMouseOver={() => showMenu('person')}
+          onFocus={() => showMenu('person')}
+          onMouseOut={() => hideMenu('person')}
+          onBlur={() => hideMenu('person')}
         >
           <button className="mr-12 font-bold text-white text-xl" type="button">
             인물
