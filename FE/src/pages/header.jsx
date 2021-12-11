@@ -12,6 +12,7 @@ export default function header() {
   const [headerVisible, setHeaderVisible] = useState(true);
   const [scrollY, setScrollY] = useState(0);
   const showMenu = (target) => {
+    console.log(target);
     if (target === 'movie') {
       setMovieIsVisible(true);
     } else if (target === 'tv') {
@@ -90,7 +91,7 @@ export default function header() {
           onMouseOut={() => hideMenu('tv')}
           onBlur={() => hideMenu('tv')}
         >
-          <button className="font-bold text-white text-xl" type="button">
+          <button className="mr-12 font-bold text-white text-xl" type="button">
             TV 프로그램
           </button>
           <DropMenu
