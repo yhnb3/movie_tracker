@@ -1,9 +1,19 @@
 /* eslint-disable import/prefer-default-export */
-export { default as Home } from './home';
-export { default as Header } from './header';
-export { default as Footer } from './footer';
-export { default as MovieContainer } from './movies/movieContainer';
-export { default as StreamingContainer } from './streaming/streamingContainer';
-export { default as SearchResult } from './search/searchResult';
-export { default as SearchContent } from './search/searchContent';
-export { default as PersonList } from './person/personList';
+import withSplitting from '../withSplitting';
+
+export const Home = withSplitting(() => import('./home'));
+export const Header = withSplitting(() => import('./header'));
+export const Footer = withSplitting(() => import('./footer'));
+export const MovieContainer = withSplitting(() =>
+  import('./movies/movieContainer'),
+);
+export const StreamingContainer = withSplitting(() =>
+  import('./streaming/streamingContainer'),
+);
+export const SearchResult = withSplitting(() =>
+  import('./search/searchResult'),
+);
+export const SearchContent = withSplitting(() =>
+  import('./search/searchContent'),
+);
+export const PersonList = withSplitting(() => import('./person/personList'));

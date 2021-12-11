@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AiFillCloseSquare } from 'react-icons/ai';
 import getKnownFor from './getKnownFor';
 
 export default function Person({ person }) {
