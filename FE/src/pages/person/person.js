@@ -11,7 +11,7 @@ export default function Person({ person }) {
     ? `https://image.tmdb.org/t/p/w235_and_h235_face${profile_path}`
     : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg';
   return (
-    <div className="border border-gray-300 shadow-sm w-person">
+    <div className="border border-gray-300 shadow-sm w-person my-5">
       <Link to={`/person/${id}`}>
         <img className="object-cover" src={profile} alt={name} />
       </Link>

@@ -14,6 +14,7 @@ import {
   MovieContainer,
   StreamingContainer,
   SearchResult,
+  PersonList,
 } from './pages/index';
 
 class App extends Component {
@@ -53,6 +54,7 @@ class App extends Component {
             <Route path=":id" element={<PersonDetailContainer />} />
           </Route>
           <Route path="/search" element={<SearchResult />} />
+          <Route path="/person/popular" element={<PersonList />} />
         </Routes>
         <Footer />
       </div>

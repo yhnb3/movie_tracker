@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
 module.exports = {
-  purge: [],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{html,js, jsx}'],
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     flex: {
       scorll: '0 0 auto',
