@@ -115,7 +115,7 @@ export default function header() {
           </button>
           <DropMenu
             category="person"
-            menus={[{ url: 'popular', name: '인기있는' }]}
+            menus={[{ url: 'popular', name: '인기 인물' }]}
             isVisible={personIsVisible}
           />
         </div>

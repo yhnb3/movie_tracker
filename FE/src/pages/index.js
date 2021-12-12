@@ -16,4 +16,6 @@ export const SearchResult = withSplitting(() =>
 export const SearchContent = withSplitting(() =>
   import('./search/searchContent'),
 );
-export const PersonList = withSplitting(() => import('./person/personList'));
+export const PersonContainer = withSplitting(() =>
+  import('./person/personContainer'),
+);
