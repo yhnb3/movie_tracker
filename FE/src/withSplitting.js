@@ -5,12 +5,10 @@ const withSplitting = (getComponent) => {
   class WithSplitting extends Component {
     constructor(props) {
       super(props);
-      console.log(props);
       this.state = {
         Splitted: null,
       };
       getComponent().then(({ default: Splitted }) => {
-        console.log(Splitted);
         this.setState({
           Splitted,
         });

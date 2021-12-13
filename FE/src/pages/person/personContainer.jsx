@@ -9,15 +9,16 @@ import {
   changePage,
   initPage,
   changeIsMount,
+  changePath,
 } from '../contentSlice';
 
 import PersonList from './personList';
 
 export default function personContainer({ section }) {
-  const location = useLocation();
-
-  const { loading, hasErrors, data, page, isMount } = useSelector(content);
+  const { loading, hasErrors, data, page, isMount, path } =
+    useSelector(content);
   const url = `https://api.themoviedb.org/3/person/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -31,9 +32,14 @@ export default function personContainer({ section }) {
   };
 
   useEffect(() => {
+    console.log(path);
+    dispatch(changePath(location.pathname));
+  });
+
+  useEffect(() => {
     dispatch(initPage());
     dispatch(fetchContents(url));
-  }, [location]);
+  }, [path]);
 
   useEffect(() => {
     if (isMount) {
@@ -56,7 +62,7 @@ export default function personContainer({ section }) {
   }, [page]);
 
   const render = () => {
-    if (loading) return <p>loading...</p>;
+    if (loading) return <p>로딩중... </p>;
     if (hasErrors) return <p>api error page</p>;
 
     return <PersonList persons={data} />;

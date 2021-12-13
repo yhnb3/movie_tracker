@@ -9,15 +9,16 @@ import {
   changePage,
   initPage,
   changeIsMount,
+  changePath,
 } from '../contentSlice';
 
 import { Poster } from '../../component/index';
 
 export default function streamingContainer({ section }) {
-  const location = useLocation();
-
-  const { loading, hasErrors, data, page, isMount } = useSelector(content);
+  const { loading, hasErrors, data, page, isMount, path } =
+    useSelector(content);
   const url = `https://api.themoviedb.org/3/tv/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -31,9 +32,15 @@ export default function streamingContainer({ section }) {
   };
 
   useEffect(() => {
+    console.log(path);
+    dispatch(changePath(location.pathname));
+  });
+
+  useEffect(() => {
+    console.log(path);
     dispatch(initPage());
     dispatch(fetchContents(url));
-  }, [location]);
+  }, [path]);
 
   useEffect(() => {
     if (isMount) {
