@@ -8,6 +8,7 @@ import {
 
 import movieReducer from './pages/contentSlice';
 import searchReducer from './pages/search/searchSlice';
+import personReducer from './pages/person/personSlice';
 
 export default configureStore({
   reducer: {
@@ -17,5 +18,6 @@ export default configureStore({
     personDetail: personDetailReducer,
     content: movieReducer,
     search: searchReducer,
+    person: personReducer,
   },
 });

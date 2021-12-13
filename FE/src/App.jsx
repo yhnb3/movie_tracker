@@ -50,14 +50,14 @@ class App extends Component {
             path="/tv/top_rated"
             element={<StreamingContainer section="top_rated" />}
           />
-          <Route path="person" element={<PersonDetailContainer />}>
-            <Route path=":id" element={<PersonDetailContainer />} />
-          </Route>
-          <Route path="/search" element={<SearchResult />} />
           <Route
             path="/person/popular"
             element={<PersonContainer section="popular" />}
           />
+          <Route path="person" element={<PersonDetailContainer />}>
+            <Route path=":id" element={<PersonDetailContainer />} />
+          </Route>
+          <Route path="/search" element={<SearchResult />} />
         </Routes>
         <Footer />
       </div>

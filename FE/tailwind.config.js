@@ -10,8 +10,20 @@ module.exports = {
       animation: {
         'show-header': 'show-header 0.3s ease-out',
         'hide-header': 'hide-header 0.3s ease-out',
+        blink: 'blink 2s ease-out infinite',
       },
       keyframes: {
+        blink: {
+          '0%': {
+            opacity: '1',
+          },
+          '50%': {
+            opacity: '0.5',
+          },
+          '100%': {
+            opacity: '1',
+          },
+        },
         'show-header': {
           '0%': {
             transform: 'translateY(-100%)',
@@ -45,6 +57,7 @@ module.exports = {
         poster: '570px',
         list: '21rem',
         sm_backdrop: '141px',
+        person: '300px',
       },
       inset: {
         '1/8': '12.5%',

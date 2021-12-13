@@ -4,19 +4,19 @@ import { debounce } from 'lodash';
 import { useLocation } from 'react-router-dom';
 import {
   fetchContents,
-  content,
+  person,
   fecthMoreContents,
   changePage,
   initPage,
   changeIsMount,
   changePath,
-} from '../contentSlice';
+} from './personSlice';
 
 import PersonList from './personList';
+import CategoryLoading from '../categoryLoading';
 
 export default function personContainer({ section }) {
-  const { loading, hasErrors, data, page, isMount, path } =
-    useSelector(content);
+  const { loading, hasErrors, data, page, isMount, path } = useSelector(person);
   const url = `https://api.themoviedb.org/3/person/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
   const location = useLocation();
 
@@ -62,9 +62,8 @@ export default function personContainer({ section }) {
   }, [page]);
 
   const render = () => {
-    if (loading) return <p>로딩중... </p>;
+    if (loading) return <CategoryLoading />;
     if (hasErrors) return <p>api error page</p>;
-
     return <PersonList persons={data} />;
   };
 
