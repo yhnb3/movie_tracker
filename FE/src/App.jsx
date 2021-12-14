@@ -24,7 +24,7 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen min-w-screen">
       <Header handleSide={handleSide} />
       <Routes>
         <Route index path="/" element={<Home sideVisible={sideVisible} />} />
