@@ -3,6 +3,9 @@ module.exports = {
   purge: ['./src/**/*.html', './src/**/*.js'],
   darkMode: 'media', // or 'media' or 'class'
   theme: {
+    screens: {
+      mobile: { max: '500px' },
+    },
     flex: {
       scorll: '0 0 auto',
     },
@@ -11,6 +14,8 @@ module.exports = {
         'show-header': 'show-header 0.3s ease-out',
         'hide-header': 'hide-header 0.3s ease-out',
         blink: 'blink 2s ease-out infinite',
+        'show-side': 'show-side 0.3s ease-out',
+        'hide-side': 'hide-side 0.3s ease-out',
       },
       keyframes: {
         blink: {
@@ -44,6 +49,28 @@ module.exports = {
           },
           '100%': {
             transform: 'translateY(0%)',
+          },
+        },
+        'show-side': {
+          '0%': {
+            transform: 'translateX(-100%)',
+          },
+          '50%': {
+            transform: 'translateX(-50%)',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
+          },
+        },
+        'hide-side': {
+          '0%': {
+            transform: 'translateX(100%)',
+          },
+          '50%': {
+            transform: 'translateX(50%)',
+          },
+          '100%': {
+            transform: 'translateX(0%)',
           },
         },
       },

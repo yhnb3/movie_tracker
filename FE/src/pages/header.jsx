@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
+import { GiHamburgerMenu } from 'react-icons/gi';
+
 import { DropMenu } from '../component/index';
 
-export default function header() {
+export default function header({ handleSide }) {
   const [movieIsVisible, setMovieIsVisible] = useState(false);
   const [tvIsVisible, setTvIsVisible] = useState(false);
   const [personIsVisible, setPersonIsVisible] = useState(false);
   const [headerVisible, setHeaderVisible] = useState(true);
   const [scrollY, setScrollY] = useState(0);
+
   const showMenu = (target) => {
     if (target === 'movie') {
       setMovieIsVisible(true);
@@ -55,14 +58,21 @@ export default function header() {
           : 'top-0'
       }`}
     >
-      <div className="flex h-full px-72 items-center">
+      <div className="flex h-full px-72 items-center mobile:px-0 mobile:justify-between relative">
+        <button type="button" onClick={() => handleSide()}>
+          <GiHamburgerMenu className="w-20 h-8 text-white hidden mobile:block" />
+        </button>
         <Link to="/">
-          <button className="mr-12 font-bold text-white text-xl" type="button">
+          <button
+            className="mr-12 font-bold text-white text-xl mobile:mx-6"
+            type="button"
+          >
             HOME
           </button>
         </Link>
+        <div className="hidden mobile:block w-20" />
         <div
-          className="flex h-full items-center"
+          className="flex h-full items-center mobile:hidden"
           data-name="movie"
           onMouseOver={() => showMenu('movie')}
           onFocus={() => showMenu('movie')}
@@ -83,7 +93,7 @@ export default function header() {
           />
         </div>
         <div
-          className="flex h-full items-center"
+          className="flex h-full items-center mobile:hidden"
           data-name="tv"
           onMouseOver={() => showMenu('tv')}
           onFocus={() => showMenu('tv')}
@@ -103,7 +113,7 @@ export default function header() {
           />
         </div>
         <div
-          className="flex h-full items-center"
+          className="flex h-full items-center mobile:hidden"
           data-name="person"
           onMouseOver={() => showMenu('person')}
           onFocus={() => showMenu('person')}

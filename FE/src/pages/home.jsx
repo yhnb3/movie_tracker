@@ -1,6 +1,9 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 
 import { ContentListContainer } from '../component';
+
+import MobileSide from './mobileSide';
 
 const sectionList = [
   {
@@ -21,8 +24,19 @@ const sectionList = [
   },
 ];
 
-const ContentListContainers = () => (
-  <div className="px-72">
+const ContentListContainers = (sideVisible) => (
+  <div className="px-72 mobile:px-0">
+    <div
+      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-700 opacity-95 ${
+        sideVisible === undefined
+          ? '-left-80'
+          : sideVisible
+          ? 'animate-show-side left-0'
+          : 'animate-hide-side -left-80'
+      }`}
+    >
+      <MobileSide />
+    </div>
     <div className="flex h-80 w-full bg-blue-200">
       <div className="m-auto w-11/12 h-2/4">
         <div className="flex-wrap mb-10">
@@ -63,6 +77,8 @@ const ContentListContainers = () => (
   </div>
 );
 
-export default function home() {
-  return <div className="pt-20 pb-28">{ContentListContainers()}</div>;
+export default function home({ sideVisible }) {
+  return (
+    <div className="pt-20 pb-28">{ContentListContainers(sideVisible)}</div>
+  );
 }
