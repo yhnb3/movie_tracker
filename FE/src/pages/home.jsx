@@ -27,7 +27,7 @@ const sectionList = [
 const ContentListContainers = (sideVisible) => (
   <div className="px-72 mobile:px-0">
     <div
-      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-700 opacity-95 ${
+      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
         sideVisible === undefined
           ? '-left-80'
           : sideVisible
