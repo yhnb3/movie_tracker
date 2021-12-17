@@ -6,10 +6,10 @@ export default function categoryLoading() {
     .map((element, idx) => idx + element);
   console.log(items);
   return (
-    <div className="grid grid-cols-5 place-items-center">
+    <div className="grid grid-cols-5 place-items-center mobile:grid-cols-2">
       {items.map((element) => (
         <div
-          className="w-person h-person bg-gray-300 my-5 animate-blink"
+          className="w-person h-person bg-gray-300 my-5 animate-blink mobile:w-40 mobile:h-auto"
           key={element}
         />
       ))}

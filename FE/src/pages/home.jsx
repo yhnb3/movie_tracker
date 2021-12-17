@@ -3,8 +3,6 @@ import React from 'react';
 
 import { ContentListContainer } from '../component';
 
-import MobileSide from './mobileSide';
-
 const sectionList = [
   {
     name: 'populars',
@@ -24,19 +22,8 @@ const sectionList = [
   },
 ];
 
-const ContentListContainers = (sideVisible) => (
+const ContentListContainers = () => (
   <div className="px-72 mobile:px-0">
-    <div
-      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
-        sideVisible === undefined
-          ? '-left-80'
-          : sideVisible
-          ? 'animate-show-side left-0'
-          : 'animate-hide-side -left-80'
-      }`}
-    >
-      <MobileSide />
-    </div>
     <div className="flex h-80 w-full bg-blue-200">
       <div className="m-auto w-11/12 h-2/4">
         <div className="flex-wrap mb-10">
@@ -77,10 +64,8 @@ const ContentListContainers = (sideVisible) => (
   </div>
 );
 
-export default function home({ sideVisible }) {
+export default function home() {
   return (
-    <div className="pt-20 pb-28 mobile:pt-10">
-      {ContentListContainers(sideVisible)}
-    </div>
+    <div className="pt-20 pb-28 mobile:pt-10">{ContentListContainers()}</div>
   );
 }

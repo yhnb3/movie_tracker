@@ -12,6 +12,7 @@ import {
   changePath,
 } from '../contentSlice';
 
+import SearchContent from '../search/searchContent';
 import { Poster } from '../../component/index';
 
 export default function streamingContainer({ section }) {
@@ -66,16 +67,36 @@ export default function streamingContainer({ section }) {
     if (loading) return <p>loading....</p>;
     if (hasErrors) return <p>api error page</p>;
 
+    if (window.innerWidth <= 500) {
+      return data.map((element) => <SearchContent content={element} />);
+    }
     return data.map((element) => (
-      <div className="h-list">
-        <Poster content={element} key={element.id} />
+      <div className="grid grid-cols-5">
+        <div className="h-list">
+          <Poster content={element} key={element.id} />
+        </div>
       </div>
     ));
   };
+  const headLine = () => {
+    if (section === 'popular') {
+      return (
+        <div className="text-xl font-bold none mobile:block">
+          인기 TV 프로그램
+        </div>
+      );
+    }
+    return (
+      <div className="text-xl font-bold none mobile:block">
+        높은 평점의 인기 TV 프로그램
+      </div>
+    );
+  };
 
   return (
-    <div>
-      <div className="grid grid-cols-5 px-72 py-28">{renderContents()}</div>
+    <div className="px-72 py-28 mobile:px-5">
+      {headLine()}
+      <div>{renderContents()}</div>
     </div>
   );
 }

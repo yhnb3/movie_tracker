@@ -69,7 +69,7 @@ export default function personContainer({ section }) {
 
   return (
     <div>
-      <div className="px-72 py-28">{render()}</div>
+      <div className="px-72 py-28 mobile:px-0">{render()}</div>
     </div>
   );
 }

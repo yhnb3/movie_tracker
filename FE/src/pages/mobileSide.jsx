@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
-export default function MobileSide({ sideVisible }) {
+export default function MobileSide({ sideVisible, handleSide }) {
   const [subMenuVisible, setSubMenuVisible] = useState({
     movie: false,
     tv: false,
@@ -41,13 +43,19 @@ export default function MobileSide({ sideVisible }) {
           }`}
         >
           <Link to="/movie/popular">
-            <li className="my-1">인기</li>
+            <li className="my-1" onClick={() => handleSide()}>
+              인기
+            </li>
           </Link>
           <Link to="/movie/top_rated">
-            <li className="my-1">평점 높은</li>
+            <li className="my-1" onClick={() => handleSide()}>
+              평점 높은
+            </li>
           </Link>
           <Link to="/movie/now_playing">
-            <li className="my-1">현재 상영중</li>
+            <li className="my-1" onClick={() => handleSide()}>
+              현재 상영중
+            </li>
           </Link>
         </ul>
         <button
@@ -63,10 +71,14 @@ export default function MobileSide({ sideVisible }) {
           }`}
         >
           <Link to="/tv/popular">
-            <li className="my-1">인기</li>
+            <li className="my-1" onClick={() => handleSide()}>
+              인기
+            </li>
           </Link>
           <Link to="/tv/top_rated">
-            <li className="my-1">평점 높은</li>
+            <li className="my-1" onClick={() => handleSide()}>
+              평점 높은
+            </li>
           </Link>
         </ul>
         <button
@@ -82,7 +94,9 @@ export default function MobileSide({ sideVisible }) {
           }`}
         >
           <Link to="/person/popular">
-            <li className="my-1">인기 인물</li>
+            <li className="my-1" onClick={() => handleSide()}>
+              인기 인물
+            </li>
           </Link>
         </ul>
       </div>
@@ -92,4 +106,5 @@ export default function MobileSide({ sideVisible }) {
 
 MobileSide.propTypes = {
   sideVisible: PropTypes.bool.isRequired,
+  handleSide: PropTypes.func.isRequired,
 };
