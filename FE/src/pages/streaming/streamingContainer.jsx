@@ -9,15 +9,13 @@ import {
   changePage,
   initPage,
   changeIsMount,
-  changePath,
 } from '../contentSlice';
 
 import SearchContent from '../search/searchContent';
 import { Poster } from '../../component/index';
 
 export default function streamingContainer({ section }) {
-  const { loading, hasErrors, data, page, isMount, path } =
-    useSelector(content);
+  const { loading, hasErrors, data, page, isMount } = useSelector(content);
   const url = `https://api.themoviedb.org/3/tv/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
   const location = useLocation();
 
@@ -33,15 +31,13 @@ export default function streamingContainer({ section }) {
   };
 
   useEffect(() => {
-    console.log(path);
-    dispatch(changePath(location.pathname));
-  });
-
-  useEffect(() => {
-    console.log(path);
     dispatch(initPage());
-    dispatch(fetchContents(url));
-  }, [path]);
+    dispatch(
+      fetchContents(
+        `https://api.themoviedb.org/3/tv/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      ),
+    );
+  }, [location]);
 
   useEffect(() => {
     if (isMount) {
@@ -70,24 +66,26 @@ export default function streamingContainer({ section }) {
     if (window.innerWidth <= 500) {
       return data.map((element) => <SearchContent content={element} />);
     }
-    return data.map((element) => (
-      <div className="grid grid-cols-5">
-        <div className="h-list">
-          <Poster content={element} key={element.id} />
-        </div>
+    return (
+      <div className="grid grid-cols-5 pt-10">
+        {data.map((element) => (
+          <div className="h-list">
+            <Poster content={element} key={element.id} />
+          </div>
+        ))}
       </div>
-    ));
+    );
   };
   const headLine = () => {
     if (section === 'popular') {
       return (
-        <div className="text-xl font-bold none mobile:block">
+        <div className="text-3xl font-bold none mobile:block mobile:text-x">
           인기 TV 프로그램
         </div>
       );
     }
     return (
-      <div className="text-xl font-bold none mobile:block">
+      <div className="text-3xl font-bold none mobile:block mobile:text-x">
         높은 평점의 인기 TV 프로그램
       </div>
     );

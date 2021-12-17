@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import {
   MovieDetailContainer,
   PersonDetailContainer,
@@ -20,9 +20,16 @@ import MobileSide from './pages/mobileSide';
 
 function App() {
   const [sideVisible, setSideVisible] = useState(undefined);
+  const location = useLocation();
   const handleSide = () => {
     setSideVisible(!sideVisible);
   };
+
+  useEffect(() => {
+    if (sideVisible) {
+      setSideVisible(false);
+    }
+  }, [location]);
 
   return (
     <div className="relative min-h-screen min-w-screen">

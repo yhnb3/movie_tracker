@@ -6,7 +6,6 @@ export const initialState = {
   isMount: true,
   loading: false,
   hasErrors: false,
-  path: '',
   data: [],
 };
 
@@ -41,9 +40,6 @@ export const slice = createSlice({
     changeIsMount: (state) => {
       state.isMount = false;
     },
-    changePath: (state, { payload }) => {
-      state.path = payload;
-    },
   },
 });
 
@@ -55,11 +51,11 @@ export const {
   changePage,
   initPage,
   changeIsMount,
-  changePath,
 } = slice.actions;
 
 export function fetchContents(url) {
   return async (dispatch) => {
+    console.log(url);
     dispatch(getContents(url));
     try {
       const response = await fetch(url);

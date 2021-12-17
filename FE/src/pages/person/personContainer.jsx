@@ -9,14 +9,13 @@ import {
   changePage,
   initPage,
   changeIsMount,
-  changePath,
 } from './personSlice';
 
 import PersonList from './personList';
 import CategoryLoading from '../categoryLoading';
 
 export default function personContainer({ section }) {
-  const { loading, hasErrors, data, page, isMount, path } = useSelector(person);
+  const { loading, hasErrors, data, page, isMount } = useSelector(person);
   const url = `https://api.themoviedb.org/3/person/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
   const location = useLocation();
 
@@ -32,14 +31,13 @@ export default function personContainer({ section }) {
   };
 
   useEffect(() => {
-    console.log(path);
-    dispatch(changePath(location.pathname));
-  });
-
-  useEffect(() => {
     dispatch(initPage());
-    dispatch(fetchContents(url));
-  }, [path]);
+    dispatch(
+      fetchContents(
+        `https://api.themoviedb.org/3/person/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      ),
+    );
+  }, [location]);
 
   useEffect(() => {
     if (isMount) {

@@ -9,7 +9,6 @@ import {
   changePage,
   initPage,
   changeIsMount,
-  changePath,
 } from '../contentSlice';
 
 import { Poster } from '../../component/index';
@@ -18,8 +17,7 @@ import SearchContent from '../search/searchContent';
 export default function movieContainer({ section }) {
   const location = useLocation();
 
-  const { loading, hasErrors, data, page, isMount, path } =
-    useSelector(content);
+  const { loading, hasErrors, data, page, isMount } = useSelector(content);
   const url = `https://api.themoviedb.org/3/movie/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
 
   const dispatch = useDispatch();
@@ -34,14 +32,13 @@ export default function movieContainer({ section }) {
   };
 
   useEffect(() => {
-    console.log(path);
-    dispatch(changePath(location.pathname));
-  });
-
-  useEffect(() => {
     dispatch(initPage());
-    dispatch(fetchContents(url));
-  }, [path]);
+    dispatch(
+      fetchContents(
+        `https://api.themoviedb.org/3/movie/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
+      ),
+    );
+  }, [location]);
 
   useEffect(() => {
     if (isMount) {
@@ -70,29 +67,37 @@ export default function movieContainer({ section }) {
     if (window.innerWidth <= 500) {
       return data.map((element) => <SearchContent content={element} />);
     }
-    return data.map((element) => (
-      <div className="grid grid-cols-5">
-        <div className="h-list">
-          <Poster content={element} key={element.id} />
-        </div>
+    return (
+      <div className="grid grid-cols-5 pt-10">
+        {data.map((element) => (
+          <div>
+            <div className="h-list">
+              <Poster content={element} key={element.id} />
+            </div>
+          </div>
+        ))}
       </div>
-    ));
+    );
   };
   const headLine = () => {
     if (section === 'popular') {
       return (
-        <div className="text-xl font-bold none mobile:block">인기 영화</div>
+        <div className="text-3xl font-bold none mobile:block mobile:text-xl">
+          인기 영화
+        </div>
       );
     }
     if (section === 'top_rated') {
       return (
-        <div className="text-xl font-bold none mobile:block">
+        <div className="text-3xl font-bold none mobile:block mobile:text-x">
           높은 평점의 인기 영화
         </div>
       );
     }
     return (
-      <div className="text-xl font-bold none mobile:block">현재 상영 영화</div>
+      <div className="text-3xll font-bold none mobile:block mobile:text-x">
+        현재 상영 영화
+      </div>
     );
   };
   return (
