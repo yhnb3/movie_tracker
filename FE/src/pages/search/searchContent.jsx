@@ -16,7 +16,7 @@ export default function searchContent({ content }) {
     : '미정';
 
   const overviewRender = () => (
-    <p className="max-h-12 overflow-ellipsis overflow-hidden line-clamp-2">
+    <p className="max-h-10 overflow-ellipsis overflow-hidden line-clamp-2 mobile:text-sm">
       {content.overview}
     </p>
   );
@@ -25,18 +25,22 @@ export default function searchContent({ content }) {
     return <></>;
   }
   return (
-    <div className="flex mt-10 border-gray-300 border rounded-lg w-6/8">
+    <div className="flex mt-10 border-gray-300 border rounded-md w-6/8 mobile:mt-5">
       <Link to={pathUrl}>
         <img
-          className="rounded-l-lg object-cover w-img h-full"
+          className="rounded-l-md object-cover w-img h-full mobile:w-auto mobile:h-36"
           src={posterUrl}
           alt=""
         />
       </Link>
-      <div className="grid grid-cols-1 p-5 gap-4 w-11/12">
+      <div className="grid grid-cols-1 p-5 gap-4 w-11/12 mobile:w-8/12 mobile:py-5 mobile:px-3">
         <div className="grid grid cols-1">
-          <p className="text-2xl align-middle">{title}</p>
-          <p className="text-xl text-gray-400 align-middle">{handlingDate}</p>
+          <p className="text-2xl align-middle mobile:text-base mobile:font-bold">
+            {title}
+          </p>
+          <p className="text-xl text-gray-400 align-middle mobile:text-sm">
+            {handlingDate}
+          </p>
         </div>
         {content.overview ? overviewRender() : <></>}
       </div>

@@ -79,6 +79,8 @@ const ContentListContainers = (sideVisible) => (
 
 export default function home({ sideVisible }) {
   return (
-    <div className="pt-20 pb-28">{ContentListContainers(sideVisible)}</div>
+    <div className="pt-20 pb-28 mobile:pt-10">
+      {ContentListContainers(sideVisible)}
+    </div>
   );
 }

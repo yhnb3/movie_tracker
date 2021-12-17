@@ -16,6 +16,7 @@ import {
   SearchResult,
   PersonContainer,
 } from './pages/index';
+import MobileSide from './pages/mobileSide';
 
 function App() {
   const [sideVisible, setSideVisible] = useState(undefined);
@@ -26,6 +27,7 @@ function App() {
   return (
     <div className="relative min-h-screen min-w-screen">
       <Header handleSide={handleSide} />
+      <MobileSide sideVisible={sideVisible} />
       <Routes>
         <Route index path="/" element={<Home sideVisible={sideVisible} />} />
         <Route path="movie" element={<MovieDetailContainer />}>
