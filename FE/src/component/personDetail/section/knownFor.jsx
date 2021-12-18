@@ -16,7 +16,7 @@ export default function knowFor({ person }) {
       <div className="inline-flex mb-4" key={content.title || content.name}>
         <Link to={`/${content.title ? 'movie' : 'tv'}/${content.id}`}>
           <img
-            className="h-48 object-cover rounded-md min-w-posterImg shadow-xl m-2"
+            className="h-48 object-cover rounded-md min-w-posterImg shadow-xl mr-2 my-1"
             src={`https://image.tmdb.org/t/p/w300/${content.poster_path}`}
             alt={content.title || content.name}
           />
@@ -26,7 +26,7 @@ export default function knowFor({ person }) {
 
   return (
     <div className="flex flex-col">
-      <p className="text-xl font-bold py-2">유명 분야</p>
+      <p className="text-2xl font-bold py-2">유명 분야</p>
       <div className="scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap">
         {render()}
       </div>

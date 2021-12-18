@@ -78,12 +78,16 @@ export default function personInfo({ person }) {
           <p className="text-xl font-bold">출생지</p>
           <p>{person.place_of_birth}</p>
         </div>
-        <div className="pb-4">
-          <p className="text-xl font-bold">다른 명칭</p>
-          {person.also_known_as.map((element) => (
-            <p key={element}>{element}</p>
-          ))}
-        </div>
+        {person.also_known_as.length > 0 ? (
+          <div className="pb-4">
+            <p className="text-xl font-bold">다른 명칭</p>
+            {person.also_known_as.map((element) => (
+              <p key={element}>{element}</p>
+            ))}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
