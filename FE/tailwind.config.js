@@ -93,6 +93,9 @@ module.exports = {
         whiteOp100: 'rgb(255 255 255 / 100%)',
         whiteOp50: 'rgb(255 255 255 / 50%)',
         whiteOp0: 'rgb(255 255 255 / 0%)',
+        blackOp100: 'rgb(0 0 0 / 100%)',
+        blackOp50: 'rgb(0 0 0 / 50%)',
+        blackOp0: 'rgb(0 0 0 / 0%)',
       },
     },
     minWidth: {
