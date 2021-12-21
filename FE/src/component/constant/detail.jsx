@@ -145,7 +145,7 @@ export default function detail({ content }) {
         <div className="my-5">
           <p className="font-bold text-xl m-2">주요 출연진</p>
           <div className="flex flex-row">
-            {content.crew.map((element) => {
+            {content.cast.map((element) => {
               if (element.order < 7) {
                 return (
                   <div

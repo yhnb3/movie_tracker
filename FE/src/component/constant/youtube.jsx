@@ -3,8 +3,8 @@ import YouTube from 'react-youtube';
 
 export default function youture({ video }) {
   const opts = {
-    height: '312',
-    width: '512',
+    height: '273',
+    width: '448',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 0,

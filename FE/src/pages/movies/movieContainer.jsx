@@ -89,13 +89,13 @@ export default function movieContainer({ section }) {
     }
     if (section === 'top_rated') {
       return (
-        <div className="text-3xl font-bold none mobile:block mobile:text-x">
+        <div className="text-3xl font-bold none mobile:block mobile:text-xl">
           높은 평점의 인기 영화
         </div>
       );
     }
     return (
-      <div className="text-3xll font-bold none mobile:block mobile:text-x">
+      <div className="text-3xll font-bold none mobile:block mobile:text-xl">
         현재 상영 영화
       </div>
     );

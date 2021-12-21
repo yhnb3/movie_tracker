@@ -79,13 +79,13 @@ export default function streamingContainer({ section }) {
   const headLine = () => {
     if (section === 'popular') {
       return (
-        <div className="text-3xl font-bold none mobile:block mobile:text-x">
+        <div className="text-3xl font-bold none mobile:block mobile:text-xl">
           인기 TV 프로그램
         </div>
       );
     }
     return (
-      <div className="text-3xl font-bold none mobile:block mobile:text-x">
+      <div className="text-3xl font-bold none mobile:block mobile:text-xl">
         높은 평점의 인기 TV 프로그램
       </div>
     );

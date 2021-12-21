@@ -54,7 +54,8 @@ export function fetchTv(id) {
       const recommendation = await recommendationResponse.json();
 
       data.provider = provider.results.KR;
-      data.crew = crew.cast;
+      data.cast = crew.cast;
+      data.crew = crew.crew;
       data.recommend = recommendation.results;
 
       dispatch(getTvDetailSuccess(data));

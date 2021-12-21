@@ -19,9 +19,9 @@ export default function MovieDetailContainer() {
     if (loading) return <p>Loading recipes...</p>;
     if (hasErrors) return <p>Cannot display recipes...</p>;
 
-    if (window.length <= 500) return <MobileDetail content={movie} />;
+    if (window.innerWidth <= 500) return <MobileDetail content={movie} />;
     return <Detail content={movie} />;
   };
 
-  return <div className="pt-20 pb-28">{renderMovie()}</div>;
+  return <div className="pt-20 pb-28 min-h-screen">{renderMovie()}</div>;
 }
