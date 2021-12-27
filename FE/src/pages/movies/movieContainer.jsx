@@ -95,13 +95,13 @@ export default function movieContainer({ section }) {
       );
     }
     return (
-      <div className="text-3xll font-bold none mobile:block mobile:text-xl">
+      <div className="text-3xl font-bold none mobile:block mobile:text-xl">
         현재 상영 영화
       </div>
     );
   };
   return (
-    <div className="px-72 pt-30 py-28 mobile:px-5">
+    <div className="mx-auto w-screen pt-30 py-28 mobile:px-5 mobile:w-full">
       {headLine()}
       <div>{renderContents()}</div>
     </div>

@@ -23,7 +23,7 @@ const sectionList = [
 ];
 
 const ContentListContainers = () => (
-  <div className="px-72 mobile:px-0">
+  <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
     <div className="flex h-80 w-full bg-blue-200">
       <div className="m-auto w-11/12 h-2/4">
         <div className="flex-wrap mb-10">

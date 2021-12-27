@@ -92,7 +92,7 @@ export default function streamingContainer({ section }) {
   };
 
   return (
-    <div className="px-72 py-28 mobile:px-5">
+    <div className="mx-auto w-screen py-28 mobile:px-5 mobile:w-full">
       {headLine()}
       <div>{renderContents()}</div>
     </div>

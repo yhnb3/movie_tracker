@@ -96,8 +96,8 @@ export default function detail({ content }) {
           <></>
         )}
         <div className="absolute w-full h-full bg-black bg-opacity-70 top-0 z-10" />
-        <div className="absolute w-full h-3/4 bottom-1/8 px-72 z-20">
-          <div className="flex flex-row">
+        <div className="absolute h-3/4 bottom-1/8 w-full z-20">
+          <div className="flex flex-row w-screen mx-auto">
             <div className="h-full">
               {content.poster_path ? (
                 <img className="h-full rounded-lg" src={posterUrl} alt="" />
@@ -141,7 +141,7 @@ export default function detail({ content }) {
           </div>
         </div>
       </div>
-      <div className="px-72">
+      <div className="w-screen mx-auto">
         <div className="my-5">
           <p className="font-bold text-xl m-2">주요 출연진</p>
           <div className="flex flex-row">

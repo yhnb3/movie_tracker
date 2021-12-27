@@ -60,12 +60,13 @@ export default function searchResult() {
       { section: 'TV 프로그램', name: 'tv', count: data.tv.totalResults },
       { section: '인물', name: 'person', count: data.person.totalResults },
     ];
+
     return results.map((element) => (
       <div
         key={element.name}
         className={`flex justify-between px-4 py-2 ${
           element.name === currentSection || isHover[element.name]
-            ? 'bg-gray-200'
+            ? 'bg-gray-200 mobile:text-blue-400 mobile:bg-transparent'
             : ''
         }`}
         role="button"
@@ -85,10 +86,10 @@ export default function searchResult() {
           {element.section}
         </span>
         <span
-          className={`text-xs text-center align-middle my-1.5 rounded-md  ${
+          className={`text-xs text-center align-middle my-1.5 rounded-md mobile:border text-black ${
             element.name === currentSection || isHover[element.name]
-              ? 'bg-white'
-              : 'bg-gray-200'
+              ? 'bg-white mobile:border-blue-400'
+              : 'bg-gray-200 mobile:bg-white'
           } w-6`}
         >
           {element.count}
@@ -204,13 +205,13 @@ export default function searchResult() {
         </div>
       );
     }
-    return <p>오류가 발생했습니다. 다시 시도해보세요.</p>;
+    return <p>검색결과가 없습니다.</p>;
   };
 
   return (
     <div className="pb-28 pt-20">
       <div className="flex border-b">
-        <div className="flex px-72">
+        <div className="flex w-screen mx-auto mobile:w-full">
           <div className="flex">
             <FaSearch className="w-3 h-3 my-auto mx-3" />
           </div>
@@ -224,16 +225,20 @@ export default function searchResult() {
           </form>
         </div>
       </div>
-      <div className="flex flex-row px-72">
-        <div className="w-4/12 pt-10 pr-10">
-          <div className="rounded-lg border border-gray-200">
-            <div className="h-16 w-full bg-blue-400 rounded-t-lg flex items-center">
+      <div className="flex flex-row w-screen mx-auto mobile:flex-col mobile:w-full">
+        <div className="w-4/12 pt-10 pr-10 mobile:w-full mobile:p-0">
+          <div className="rounded-lg border border-gray-200 mobile:rounded-none">
+            <div className="h-16 w-full bg-blue-400 rounded-t-lg flex items-center mobile:rounded-none">
               <div className="ml-4 text-white font-bold">Search Result</div>
             </div>
-            <div className="mt-2 my-5">{sectionResulst()}</div>
+            <div>
+              <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0">
+                {sectionResulst()}
+              </div>
+            </div>
           </div>
         </div>
-        <div className="w-8/12">
+        <div className="w-8/12 mobile:w-full mobile:px-5">
           {currentSection === 'person' ? (
             <div>{personResult()}</div>
           ) : (

@@ -78,6 +78,7 @@ module.exports = {
         person: '235px',
         img: '150px',
         sm_backdrop: '250px',
+        screen: '1400px',
       },
       height: {
         img: '225px',

@@ -58,7 +58,7 @@ export default function header({ handleSide }) {
           : 'top-0'
       }`}
     >
-      <div className="flex h-full px-72 items-center mobile:px-0 mobile:justify-between relative">
+      <div className="flex h-full w-screen mx-auto items-center mobile:px-0 mobile:w-full mobile:justify-between relative">
         <button type="button" onClick={() => handleSide()}>
           <GiHamburgerMenu className="w-20 h-8 text-white hidden mobile:block" />
         </button>
