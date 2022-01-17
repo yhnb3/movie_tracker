@@ -22,50 +22,54 @@ const sectionList = [
   },
 ];
 
+const ContentLists = () => (
+  <div>
+    {sectionList.map((sectionItem) => (
+      <ContentListContainer
+        key={sectionItem.name}
+        title={sectionItem.title}
+        urls={sectionItem.urls}
+        name={sectionItem.name}
+        categories={Object.keys(sectionItem.urls)}
+      />
+    ))}
+  </div>
+);
+
 const ContentListContainers = () => (
-  <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
-    <div className="flex h-80 w-full bg-blue-200">
-      <div className="m-auto w-11/12 h-2/4">
-        <div className="flex-wrap mb-10">
-          <p className="text-4xl">Welcome.</p>
-          <p className="text-2xl">
-            Millions of movies, TV shows and people to discover. Explore now.
-          </p>
-        </div>
-        <div className="relative rounded-full bg-white">
-          <form action="/search?" className="h-12 w-full">
-            <input
-              className="px-5 py-3 outline-none rounded-full w-10/12"
-              type="text"
-              dir="auto"
-              name="query"
-              placeholder="영화, tv 프로그램 검색..."
-            />
-            <input
-              type="submit"
-              value="Search"
-              className="absolute h-full rounded-full w-20 right-0 z-10 cursor-pointer"
-            />
-          </form>
+  <div className="pt-20 pb-28 mobile:pt-10">
+    <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
+      <div className="flex h-80 w-full bg-blue-200">
+        <div className="m-auto w-11/12 h-2/4">
+          <div className="flex-wrap mb-10">
+            <p className="text-4xl">Welcome.</p>
+            <p className="text-2xl">
+              Millions of movies, TV shows and people to discover. Explore now.
+            </p>
+          </div>
+          <div className="relative rounded-full bg-white">
+            <form action="/search?" className="h-12 w-full">
+              <input
+                className="px-5 py-3 outline-none rounded-full w-10/12"
+                type="text"
+                dir="auto"
+                name="query"
+                placeholder="영화, tv 프로그램 검색..."
+              />
+              <input
+                type="submit"
+                value="Search"
+                className="absolute h-full rounded-full w-20 right-0 z-10 cursor-pointer"
+              />
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      {sectionList.map((sectionItem) => (
-        <ContentListContainer
-          key={sectionItem.name}
-          title={sectionItem.title}
-          urls={sectionItem.urls}
-          name={sectionItem.name}
-          categories={Object.keys(sectionItem.urls)}
-        />
-      ))}
+      <ContentLists />
     </div>
   </div>
 );
 
 export default function home() {
-  return (
-    <div className="pt-20 pb-28 mobile:pt-10">{ContentListContainers()}</div>
-  );
+  return <ContentListContainers />;
 }
