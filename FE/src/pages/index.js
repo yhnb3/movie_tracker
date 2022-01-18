@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import withSplitting from '../withSplitting';
 
-export const Home = withSplitting(() => import('./home'));
+export const Home = withSplitting(() => import('./home.tsx'));
 export const Header = withSplitting(() => import('./header'));
 export const Footer = withSplitting(() => import('./footer'));
 export const MovieContainer = withSplitting(() =>

@@ -1,9 +1,21 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import * as React from "react";
 
 import { ContentListContainer } from '../component';
 
-const sectionList = [
+interface Section {
+  name: string,
+  title: string,
+  urls: {
+    상영중: string,
+    TV: string
+  } | {
+    오늘: string,
+    이번주: string
+  }
+}
+
+const sectionList : Array<Section> = [
   {
     name: 'populars',
     title: "What's popular?",
@@ -70,6 +82,6 @@ const ContentListContainers = () => (
   </div>
 );
 
-export default function home() {
+export default function Home() {
   return <ContentListContainers />;
 }
