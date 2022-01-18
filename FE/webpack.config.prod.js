@@ -12,20 +12,15 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: '/node_modules',
-        use: ['babel-loader'],
-      },
-      {
-        test: /.jsx?$/,
+        test: /\.(js|jsx|tsx)$/,
         include: [path.resolve(__dirname, 'src')],
         exclude: [path.resolve(__dirname, 'node_modules')],
-        loader: 'babel-loader',
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: /.css?$/,
