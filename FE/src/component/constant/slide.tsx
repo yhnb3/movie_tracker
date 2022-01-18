@@ -26,7 +26,7 @@ const Slide : React.FC<Props> = ({Content, contents} : Props) => {
     >
       {contents.map((content) => (
         <div className="inline-flex px-5" key={content.id}>
-          <Content content={content} />
+          {/* <Content content={content} /> */}
         </div>
       ))}
     </div>
