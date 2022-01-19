@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchMovies, changeCategory, contentList } from './contentListSlice';
 
 import CategoryBtn from './categoryBtn';
-import { Poster } from '../index';
+import { Poster, Slide } from '../index';
 
 export default function contentListContainer({
   urls,
@@ -11,8 +11,6 @@ export default function contentListContainer({
   categories,
   title,
 }) {
-  const scrollRef = useRef();
-  const [isScrolling, setIsScrolling] = useState(false);
   const dispatch = useDispatch();
   const { items } = useSelector(contentList);
 
@@ -32,14 +30,6 @@ export default function contentListContainer({
 
   const categoryChange = ({ category, section }) => {
     dispatch(changeCategory({ category, name: section }));
-  };
-
-  const handleScroll = () => {
-    if (scrollRef.current.scrollLeft === 0) {
-      setIsScrolling(false);
-    } else {
-      setIsScrolling(true);
-    }
   };
 
   const renderContentsList = () => {
@@ -66,26 +56,7 @@ export default function contentListContainer({
           />
         </div>
 
-        <div className="relative">
-          <div
-            className="relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap h-list"
-            ref={scrollRef}
-            onScroll={() => handleScroll()}
-          >
-            {contents.map((content) => (
-              <div className="inline-flex px-5" key={content.id}>
-                <Poster content={content} />
-              </div>
-            ))}
-          </div>
-          <div
-            className={`z-20 h-list w-20 absolute bottom-0 right-0 ${
-              isScrolling
-                ? ''
-                : 'bg-gradient-to-r from-whiteOp0 via-whiteOp50 to-whiteOp100'
-            }`}
-          />
-        </div>
+        <Slide Component={Poster} contents={contents} />
       </div>
     );
   };

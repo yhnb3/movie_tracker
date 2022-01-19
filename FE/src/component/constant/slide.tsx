@@ -1,11 +1,11 @@
 import * as React from 'react'
 
 interface Props {
-  Content: React.FC,
+  Component: React.FC<{content : any}>,
   contents: Array<any>
 }
 
-const Slide : React.FC<Props> = ({Content, contents} : Props) => {
+const Slide : React.FC<Props> = ({Component, contents} : Props) => {
   const [isScrolling, setIsScrolling] = React.useState<boolean>(false);
 
   const scrollRef = React.useRef<HTMLInputElement>()
@@ -20,13 +20,13 @@ const Slide : React.FC<Props> = ({Content, contents} : Props) => {
 
   return <div className="relative">
     <div
-      className="relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap h-list"
+      className="relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap"
       ref={scrollRef}
       onScroll={() => handleScroll()}
     >
       {contents.map((content) => (
         <div className="inline-flex px-5" key={content.id}>
-          {/* <Content content={content} /> */}
+          <Component content={content} />
         </div>
       ))}
     </div>

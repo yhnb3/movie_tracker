@@ -35,18 +35,20 @@ export default function poster({ content }) {
   };
 
   return (
-    <div className="relative h-img w-img top-0 flex-col whitespace-normal shadow-md rounded-lg">
-      <Link to={pathUrl}>
-        <img
-          className="rounded-lg object-cover w-img h-full mx-auto"
-          src={posterUrl}
-          alt=""
-        />
-      </Link>
-      {rate(content.vote_average)}
-      <div className="mt-4">
-        <p className="text-md font-bold">{title}</p>
-        <p className="text-sm text-gray-400">{handlingDate}</p>
+    <div className="h-list">
+      <div className="relative h-img w-img top-0 flex-col whitespace-normal shadow-md rounded-lg">
+        <Link to={pathUrl}>
+          <img
+            className="rounded-lg object-cover w-img h-full mx-auto"
+            src={posterUrl}
+            alt=""
+          />
+        </Link>
+        {rate(content.vote_average)}
+        <div className="mt-4">
+          <p className="text-md font-bold">{title}</p>
+          <p className="text-sm text-gray-400">{handlingDate}</p>
+        </div>
       </div>
     </div>
   );
