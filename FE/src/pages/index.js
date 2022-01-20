@@ -2,7 +2,7 @@
 import withSplitting from '../withSplitting';
 
 export const Home = withSplitting(() => import('./home.tsx'));
-export const Header = withSplitting(() => import('./header'));
+export const Header = withSplitting(() => import('./Header.tsx'));
 export const Footer = withSplitting(() => import('./footer'));
 export const MovieContainer = withSplitting(() =>
   import('./movies/movieContainer'),

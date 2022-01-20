@@ -13,9 +13,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.15.4",
     "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
     "@reduxjs/toolkit": "^1.6.1",
     "@storybook/builder-webpack5": "^6.4.9",
     "@storybook/manager-webpack5": "^6.4.9",
