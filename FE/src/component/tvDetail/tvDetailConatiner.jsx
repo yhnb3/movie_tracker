@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { fetchTv, tvDetail } from './tvDetailSlice';
 import { Detail, MobileDetail } from '../index';
+import useFetchData from '../custom/useFetchData.tsx';
 
 export default function TVDetailContainer() {
-  const dispatch = useDispatch();
-  const { loading, hasErrors, tv } = useSelector(tvDetail);
   const tvId = useParams();
   const location = useLocation();
-
-  useEffect(() => {
-    dispatch(fetchTv(tvId));
-  }, [location]);
+  const { loading, hasErrors, data } = useFetchData({
+    target: tvDetail,
+    patchData: fetchTv,
+    location,
+    id: tvId,
+  });
 
   const renderTv = () => {
     if (loading) return <p>로딩중....</p>;
     if (hasErrors) return <p>데이터를 불러오는데 실패하였습니다.</p>;
 
-    if (window.innerWidth <= 500) return <MobileDetail content={tv} />;
-    return <Detail content={tv} />;
+    if (window.innerWidth <= 500) return <MobileDetail content={data} />;
+    return <Detail content={data} />;
   };
 
   return <div className="pt-20 pb-28">{renderTv()}</div>;

@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   loading: true,
   hasErrors: false,
-  tv: {},
+  data: {},
 };
 
 export const slice = createSlice({
@@ -15,7 +15,7 @@ export const slice = createSlice({
       state.loading = true;
     },
     getTvDetailSuccess: (state, { payload }) => {
-      state.tv = payload;
+      state.data = payload;
       state.loading = false;
       state.hasErrors = false;
     },

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   loading: true,
-  isError: false,
+  hasErrors: false,
   data: {},
 };
 
@@ -17,11 +17,11 @@ export const slice = createSlice({
     getPersonDetailSuccess: (state, { payload }) => {
       state.data = payload;
       state.loading = false;
-      state.isError = false;
+      state.hasErrors = false;
     },
     getPersonDetailFailure: (state) => {
       state.loading = false;
-      state.isError = true;
+      state.hasErrors = true;
     },
   },
 });

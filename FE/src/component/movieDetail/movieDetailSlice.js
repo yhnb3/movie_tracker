@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const initialState = {
   loading: true,
   hasErrors: false,
-  movie: {},
+  data: {},
   provider: [],
 };
 
@@ -16,7 +16,7 @@ export const slice = createSlice({
       state.loading = true;
     },
     getMovieDetailSuccess: (state, { payload }) => {
-      state.movie = payload;
+      state.data = payload;
       state.loading = false;
       state.hasErrors = false;
     },
