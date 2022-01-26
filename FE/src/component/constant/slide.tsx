@@ -18,7 +18,8 @@ const Slide : React.FC<Props> = ({Component, contents} : Props) => {
     }
   };
 
-  return <div className="relative">
+  return (
+  <div className="relative">
     <div
       className="relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap"
       ref={scrollRef}
@@ -37,7 +38,7 @@ const Slide : React.FC<Props> = ({Component, contents} : Props) => {
           : 'bg-gradient-to-r from-whiteOp0 via-whiteOp50 to-whiteOp100'
       }`}
     />
-    </div>
+  </div>)
 }
 
 export { Slide as default }

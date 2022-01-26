@@ -2,6 +2,10 @@
 
 React를 이용한 TMDB 클론 사이트입니다.
 
+### 주소
+
+https://tmdb-made-by-kangwoo.netlify.app/
+
 ### 설치
 
 **패키지 설치**
@@ -56,17 +60,17 @@ npm build
 
 - Typescript
 
-- @emothion **OR** styledComponent
-
-  tailwind를 이용하였지만 비효율적인면이 있다 생각하여 emotion과 styledComponent 중 하나를 골라서 바꿀 예정입니다.
-
-
-
 ## 계획
 
-- [ ] 코드 리팩토링 - 진행중
-  - [x] 여러 곳에 중복되서 사용되는 슬라이드 함수 만들기 - 진행중
+- [x] 코드 리팩토링
+  - [x] 여러 곳에 중복되서 사용되는 슬라이드 함수 만들기
   - [x] custom hook을 이용해 일부 컴포넌트에서 Data patch 과정 중복 제거
-  
 - [ ] 초기 구동 속도 향상
+- [ ] code splitting 코드 해체 분석하기 - 원리에 대해 잘모름.
+
+
+
+
+
+
 
