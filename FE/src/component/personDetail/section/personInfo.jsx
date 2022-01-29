@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 
-import {
-  AiFillFacebook,
-  AiOutlineInstagram,
-  AiOutlineTwitter,
-  AiOutlineLink,
-} from 'react-icons/ai';
+import { AiFillFacebook } from '@react-icons/all-files/ai/AiFillFacebook';
+import { AiOutlineInstagram } from '@react-icons/all-files/ai/AiOutlineInstagram';
+import { AiOutlineTwitter } from '@react-icons/all-files/ai/AiOutlineTwitter';
+import { AiOutlineLink } from '@react-icons/all-files/ai/AiOutlineLink';
 
 export default function personInfo({ person }) {
   const now = new Date();

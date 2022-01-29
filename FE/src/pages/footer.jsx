@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiFillGithub } from 'react-icons/ai';
+import { AiFillGithub } from '@react-icons/all-files/ai/AiFillGithub';
 
 export default () => (
   <footer className="absolute w-full bottom-0 h-20 bg-blue-900 flex items-center">

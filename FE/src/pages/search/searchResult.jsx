@@ -3,8 +3,8 @@ import qs from 'qs';
 
 import { useLocation, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaSearch } from 'react-icons/fa';
-import { BsDot } from 'react-icons/bs';
+import { FaSearch } from '@react-icons/all-files/fa/FaSearch';
+import { BsDot } from '@react-icons/all-files/bs/BsDot';
 
 import {
   search,

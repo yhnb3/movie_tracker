@@ -1,5 +1,5 @@
 import React from 'react';
-import { BsCircle } from 'react-icons/bs';
+import { BsCircle } from '@react-icons/all-files/bs/BsCircle';
 
 import handlingHistory from './handlingHistory';
 

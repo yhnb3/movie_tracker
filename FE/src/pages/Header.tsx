@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 
 import HeaderBtn from './header/HeaderBtn'
 

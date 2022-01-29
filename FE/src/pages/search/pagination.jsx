@@ -1,5 +1,6 @@
 import React from 'react';
-import { CgArrowLeft, CgArrowRight } from 'react-icons/cg';
+import { CgArrowLeft } from '@react-icons/all-files/cg/CgArrowLeft';
+import { CgArrowRight } from '@react-icons/all-files/cg/CgArrowRight';
 
 export default function pagination({ page, totalPage, onChangePage }) {
   const pages = [...Array(totalPage).keys()].map((_, idx) => idx + 1);

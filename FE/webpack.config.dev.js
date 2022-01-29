@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: './src/index.js',
@@ -37,6 +38,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.config().parsed),
     }),
+    new BundleAnalyzerPlugin(),
   ],
   devServer: {
     compress: true,
