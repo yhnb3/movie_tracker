@@ -67,10 +67,14 @@ npm build
   - [x] custom hook을 이용해 일부 컴포넌트에서 Data patch 과정 중복 제거
 - [ ] 초기 구동 속도 향상
 - [ ] code splitting 코드 해체 분석하기 - 원리에 대해 잘모름.
+- [ ] react-helmet 적용하기
 
 
 
+## lighthouse 결과
 
+![image](https://user-images.githubusercontent.com/60080270/151665459-5834ad14-c269-4357-9f5b-6c6c951105af.png)
 
+현재 `light-house`로 검사 해보았을때 성능과 권장사항 부분은 어느정도 만족하는 것으로 볼 수 있다.
 
-
+접근성과 검색엔진 최적화 부분을 조금 더 업그레이드 해야할 것 같다.
