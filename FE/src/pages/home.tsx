@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import * as React from "react";
+import {Helmet} from 'react-helmet'
 
 import { ContentListContainer } from '../component';
 
@@ -50,6 +51,10 @@ const ContentLists = () => (
 
 const ContentListContainers = () => (
   <div className="pt-20 pb-28 mobile:pt-10">
+    <Helmet>
+      <title>TMDB BY KANGWOO</title>
+      <meta name="description" content="Helmet application" />
+    </Helmet>
     <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
       <div className="flex h-80 w-full bg-blue-200">
         <div className="m-auto w-11/12 h-2/4">

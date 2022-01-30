@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
   fetchContents,
   content,
@@ -83,6 +84,10 @@ export default function movieContainer({ section }) {
     if (section === 'popular') {
       return (
         <div className="text-3xl font-bold none mobile:block mobile:text-xl">
+          <Helmet>
+            <title>인기 영화</title>
+            <meta name="description" content="Helmet application" />
+          </Helmet>
           인기 영화
         </div>
       );
@@ -90,12 +95,20 @@ export default function movieContainer({ section }) {
     if (section === 'top_rated') {
       return (
         <div className="text-3xl font-bold none mobile:block mobile:text-xl">
+          <Helmet>
+            <title>높은 평점의 인기 영화</title>
+            <meta name="description" content="Helmet application" />
+          </Helmet>
           높은 평점의 인기 영화
         </div>
       );
     }
     return (
       <div className="text-3xl font-bold none mobile:block mobile:text-xl">
+        <Helmet>
+          <title>현재 상영 영화</title>
+          <meta name="description" content="Helmet application" />
+        </Helmet>
         현재 상영 영화
       </div>
     );

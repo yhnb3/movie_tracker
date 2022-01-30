@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FaSearch } from '@react-icons/all-files/fa/FaSearch';
 import { BsDot } from '@react-icons/all-files/bs/BsDot';
 
+import { Helmet } from 'react-helmet';
 import {
   search,
   fetchSearchResult,
@@ -210,6 +211,10 @@ export default function searchResult() {
 
   return (
     <div className="pb-28 pt-20">
+      <Helmet>
+        <title>{query.query}</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <div className="flex border-b">
         <div className="flex w-screen mx-auto mobile:w-full">
           <div className="flex">

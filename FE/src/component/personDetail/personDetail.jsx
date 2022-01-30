@@ -1,10 +1,15 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { KnownFor, PersonHistory, PersonInfo } from './section';
 
 export default function personDetail({ person }) {
   console.log(person);
   return (
     <div className="w-screen mx-auto pt-20 pb-28 flex flex-row mt-10 mobile:px-0 mobile:w-full">
+      <Helmet>
+        <title>{person.name}</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <div className="flex flex-col min-w-personImg ">
         <img
           className="w-80 object-cover rounded-md shadow-lg"

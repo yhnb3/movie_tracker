@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React from 'react';
 
+import { Helmet } from 'react-helmet';
 import Youtube from './youtube';
 
 import SeasonSection from './seasonSection';
@@ -46,6 +47,10 @@ export default function detail({ content }) {
 
   return (
     <div>
+      <Helmet>
+        <title>{content.title ? content.title : content.name}</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <SummarySection content={content} />
       <div className="w-screen mx-auto">
         <CastList cast={content.cast} />

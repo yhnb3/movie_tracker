@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
   fetchContents,
   person,
@@ -67,6 +68,10 @@ export default function personContainer({ section }) {
 
   return (
     <div>
+      <Helmet>
+        <title>인기 인물</title>
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <div className="w-screen mx-auto py-28 mobile:px-0 mobile:w-full">
         {render()}
       </div>
