@@ -1,35 +1,24 @@
-import * as React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'
+import useSWR from 'swr'
 
 
 interface Props {
-  target: any,
-  patchData: (id?: Number) => void,
-  id? : Number,
-  location: any,
+  urls: Array<string>,
 }
 
-interface Variable {
-  loading: boolean, 
-  hasErrors: boolean, 
-  data: any
-}
 
 const useFetchData: any = ({...props} : Props) => {
-  const dispatch = useDispatch()
-  const { id, patchData, location, target } = props
-  const { loading, hasErrors, data } : Variable = useSelector(target);
+  const fetcher = (urls : Array<string>) => {
+    const f = (url : string) => axios.get(url).then((res) => res.data)
+    return Promise.all(urls.map(f))
+  };
+  const { data, error } = useSWR(
+    [props.urls],
+    fetcher,
+  );
 
-  React.useEffect(() => {
-    if (id === undefined) {
-      dispatch(patchData())
-    } else {
-      dispatch(patchData(props.id))
-    }
-  }, [location])
-
-  if (loading) return {loading: true}
-  if (hasErrors) return {hasErrors: true}
+  if (!error && !data) return {loading: true}
+  if (error) return {hasErrors: true}
   return {data}
 }
 

@@ -1,29 +1,37 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import PersonDetail from './personDetail';
-import { personDetail, fetchPerson } from './personDetailSlice';
 import PersonMobileDetail from './personMobileDetail';
 import useFetchData from '../custom/useFetchData.tsx';
 
 export default function personDetailContainer() {
   const { id } = useParams();
-  const location = useLocation();
+
+  const urls = [
+    `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
+
+    `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
+
+    `https://api.themoviedb.org/3/person/${id}/external_ids?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
+  ];
+
   const { loading, hasErrors, data } = useFetchData({
-    target: personDetail,
-    id,
-    location,
-    patchData: fetchPerson,
+    urls,
   });
 
   const render = () => {
     if (loading) return <p>로딩 중....</p>;
     if (hasErrors) return <p>데이터를 불러오는 중에 오류가 발생하였습니다.</p>;
 
+    const [handlingData, credit, social] = data;
+    handlingData.credit = credit;
+    handlingData.social = social;
+
     if (window.innerWidth <= 500) {
-      return <PersonMobileDetail person={data} />;
+      return <PersonMobileDetail person={handlingData} />;
     }
-    return <PersonDetail person={data} />;
+    return <PersonDetail person={handlingData} />;
   };
 
   return render();

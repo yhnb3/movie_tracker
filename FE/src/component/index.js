@@ -1,8 +1,5 @@
 // reducers
-export { default as movieDetailReducer } from './movieDetail/movieDetailSlice';
 export { default as contentListReducer } from './contentList/contentListSlice';
-export { default as tvDetailReducer } from './tvDetail/tvDetailSlice';
-export { default as personDetailReducer } from './personDetail/personDetailSlice';
 
 // containers
 export { default as ContentListContainer } from './contentList/contentListContainer';
