@@ -50,6 +50,8 @@ npm build
 
 - netlify
 
+- swr
+
 
 
 ## 추가하고픈 스킬
@@ -65,6 +67,7 @@ npm build
 - [x] 코드 리팩토링
   - [x] 여러 곳에 중복되서 사용되는 슬라이드 함수 만들기
   - [x] custom hook을 이용해 일부 컴포넌트에서 Data patch 과정 중복 제거
+  - [x] swr을 추가하여 필요없는 reducer 제거
 - [ ] 초기 구동 속도 향상
 - [ ] code splitting 코드 해체 분석하기 - 원리에 대해 잘모름.
 - [ ] react-helmet 적용하기
