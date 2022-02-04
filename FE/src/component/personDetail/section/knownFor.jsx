@@ -1,11 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useFetchData from '../../custom/useFetchData.tsx';
 
 export default function knowFor({ person }) {
+  const endPoint = `https://api.themoviedb.org/3/person/${person.id}/combined_credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`;
+  const { loading, error, data } = useFetchData({ endPoint });
+
+  if (loading) return <p>로딩중...</p>;
+  if (error) return <p>에러가 발생하였습니다.</p>;
+
   const movies =
-    person.known_for_department === 'Acting'
-      ? person.credit.cast
-      : person.credit.crew;
+    person.known_for_department === 'Acting' ? data.cast : data.crew;
   const usableMovies = movies.map((content) => content);
   const sortedMovies = usableMovies
     .sort((a, b) => b.vote_count - a.vote_count)

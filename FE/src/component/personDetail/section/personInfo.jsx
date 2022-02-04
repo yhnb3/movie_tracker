@@ -5,16 +5,23 @@ import { AiFillFacebook } from '@react-icons/all-files/ai/AiFillFacebook';
 import { AiOutlineInstagram } from '@react-icons/all-files/ai/AiOutlineInstagram';
 import { AiOutlineTwitter } from '@react-icons/all-files/ai/AiOutlineTwitter';
 import { AiOutlineLink } from '@react-icons/all-files/ai/AiOutlineLink';
+import useFetchData from '../../custom/useFetchData.tsx';
 
 export default function personInfo({ person }) {
+  const endPoint = `https://api.themoviedb.org/3/person/${person.id}/external_ids?api_key=${process.env.REACT_APP_API_CODE}&language=ko`;
+  const { loading, error, data } = useFetchData({ endPoint });
+
+  if (loading) return <p>로딩중.....</p>;
+  if (error) return <p>에러가 발생하였습니다.</p>;
+
   const now = new Date();
   return (
     <div className="px-1 py-5">
       <div className="flex flex-row my-3">
         <div className="flex flex-row border-r border-gray-200">
-          {person.social.facebook_id ? (
+          {data.facebook_id ? (
             <a
-              href={`https://facebook.com/${person.social.facebook_id}`}
+              href={`https://facebook.com/${data.facebook_id}`}
               target="_blank"
             >
               <AiFillFacebook className="w-8 h-8 mx-2" />
@@ -22,19 +29,16 @@ export default function personInfo({ person }) {
           ) : (
             <></>
           )}
-          {person.social.twitter_id ? (
-            <a
-              href={`https://twitter.com/${person.social.twitter_id}`}
-              target="_blank"
-            >
+          {data.twitter_id ? (
+            <a href={`https://twitter.com/${data.twitter_id}`} target="_blank">
               <AiOutlineTwitter className="w-8 h-8 mx-2" />
             </a>
           ) : (
             <></>
           )}
-          {person.social.instagram_id ? (
+          {data.instagram_id ? (
             <a
-              href={`https://instagram.com/${person.social.instagram_id}`}
+              href={`https://instagram.com/${data.instagram_id}`}
               target="_blank"
             >
               <AiOutlineInstagram className="w-8 h-8 mx-2" />

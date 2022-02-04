@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet';
 import { KnownFor, PersonHistory, PersonInfo } from './section';
 
 export default function personDetail({ person }) {
-  console.log(person);
   return (
     <div className="w-screen mx-auto pt-20 pb-28 flex flex-row mt-10 mobile:px-0 mobile:w-full">
       <Helmet>

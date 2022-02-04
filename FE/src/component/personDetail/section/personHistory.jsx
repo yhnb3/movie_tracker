@@ -2,9 +2,16 @@ import React from 'react';
 import { BsCircle } from '@react-icons/all-files/bs/BsCircle';
 
 import handlingHistory from './handlingHistory';
+import useFetchData from '../../custom/useFetchData.tsx';
 
 export default function personHistory({ person }) {
-  const newArr = handlingHistory({ credit: person.credit });
+  const endPoint = `https://api.themoviedb.org/3/person/${person.id}/combined_credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`;
+  const { loading, error, data } = useFetchData({ endPoint });
+
+  if (loading) return <p>로딩중...</p>;
+  if (error) return <p>에러가 발생하였습니다.</p>;
+
+  const newArr = handlingHistory({ credit: data });
   return (
     <div className="flex flex-col">
       {newArr.map((job) => (
