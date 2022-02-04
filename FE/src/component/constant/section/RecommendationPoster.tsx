@@ -2,7 +2,13 @@ import * as React from 'react'
 import {Link} from 'react-router-dom'
 
 interface Props {
-  content : any,
+  content : {
+    id: string,
+    title?: string,
+    name?: string,
+    backdrop_path: string,
+    vote_average: number
+  },
 }
 
 const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
@@ -29,4 +35,4 @@ const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
 
 }
 
-export { RecommendationPoster as default }
+export default RecommendationPoster

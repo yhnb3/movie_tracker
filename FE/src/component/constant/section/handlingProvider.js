@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 export default function handlingProvider({ provider }) {
   const providerSet = new Set();
   const providerMap = new Map();
@@ -15,5 +16,14 @@ export default function handlingProvider({ provider }) {
       providerMap.set(site.provider_name, site);
     }
   });
-  return [...providerMap.values()];
+
+  const providerList = [];
+  const iterator = providerMap.values();
+
+  while (true) {
+    const { done, value } = iterator.next();
+    if (done) break;
+    providerList.push(value);
+  }
+  return providerList;
 }

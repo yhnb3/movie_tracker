@@ -1,25 +1,58 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import * as React from 'react'
+import useFetchData from '../../custom/useFetchData';
 
 import RateCircle from '../rateCircle';
 
 import  handlingProvider  from './handlingProvider';
 
 interface Props {
-  content: any
+  content: {
+    id: string,
+    title? : string,
+    name? : string,
+    release_date?: string,
+    first_air_date? : string,
+    provider: any,
+    genres: Array<{name: string}> | [],
+    backdrop_path: string,
+    poster_path: string,
+    production_countries: Array<any>,
+    vote_average: number,
+    tagline: string,
+    overview: string,
+  } 
 }
-
-
 const SummarySection: React.FC<Props> = ({content} : Props) => {
+  const section = content.title ? 'movie' : 'tv'
   const date = content.title ? content.release_date : content.first_air_date;
   const backdropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const title = content.title || content.name;
-  const providers = handlingProvider(content);
 
+  const endPoint = `https://api.themoviedb.org/3/${section}/${content.id}/watch/providers?api_key=${process.env.REACT_APP_API_CODE}`
+  const { loading, data, error } = useFetchData({endPoint})
 
+  const Providers = () => {
+    if (loading) return <></>
+    if (error) return <></>
+
+    const providers = handlingProvider({provider: data.results.KR})
+    return <div className="flex flex-row my-2">
+    {providers.map((element: { id: string; logo_path: string; }) => (
+      <img
+        className="h-14 rounded-md mx-2"
+        key={element.id}
+        src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
+        alt=""
+      />
+    ))}
+  </div>
+  }
   const renderGenre = () => {
-    const { genres } = content || [];
-    const genreString = genres.map((genre: { name: any; }) => genre.name).join(', ');
+    const { genres  } = content;
+    const genreString = genres.map((genre: { name: string; }) => genre.name).join(', ');
     return <span className="mx-1">{genreString}</span>;
   };
 
@@ -90,16 +123,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
         <p className="max-h-20 overflow-ellipsis overflow-hidden text-sm line-clamp-4 my-2">
           {content.overview || '해당 언어의 줄거리가 존재하지 않습니다.'}
         </p>
-        <div className="flex flex-row my-2">
-          {providers.map((element: { id: React.Key; logo_path: any; }) => (
-            <img
-              className="h-14 rounded-md mx-2"
-              key={element.id}
-              src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
-              alt=""
-            />
-          ))}
-        </div>
+        <Providers />
       </div>
     </div>
   </div>

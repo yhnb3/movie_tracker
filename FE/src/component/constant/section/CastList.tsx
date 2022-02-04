@@ -1,16 +1,27 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import * as React from 'react'
 
 import { Link } from 'react-router-dom'
+import useFetchData from '../../custom/useFetchData'
 
 interface Props {
-  cast: Array<any>
+  id: string,
+  section: string,
 }
 
-const CastList : React.FC<Props> = ({cast} : Props) => (
+const CastList : React.FC<Props> = ({id, section} : Props) => {
+  const endPoint = `https://api.themoviedb.org/3/${section}/${id}/credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`
+  const { loading, error, data } = useFetchData({endPoint})
+  
+  if (loading) return <p>로딩중...</p>
+  if (error) return <p>에러가 발생하였습니다.</p>
+
+  return (
   <div className="my-5">
     <p className="font-bold text-xl m-2">주요 출연진</p>
     <div className="flex flex-row">
-      {cast.map((element) => {
+      {data.cast.map((element: { name: string, character: string, id: string, order: number, profile_path: string}) => {
         if (element.order < 7) {
           return (
             <div
@@ -37,5 +48,5 @@ const CastList : React.FC<Props> = ({cast} : Props) => (
       })}
     </div>
   </div>
-)
+)}
 export default CastList
