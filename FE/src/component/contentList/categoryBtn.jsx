@@ -3,7 +3,6 @@ import React from 'react';
 export default function categoryBtn({
   categories,
   categoryChange,
-  section,
   currentCategory,
 }) {
   return (
@@ -14,7 +13,7 @@ export default function categoryBtn({
             <button
               key={category}
               className="rounded-full bg-gray-500 text-white px-5 py-1"
-              onClick={() => categoryChange({ section, category })}
+              onClick={() => categoryChange(category)}
               type="button"
             >
               {category}
@@ -25,7 +24,7 @@ export default function categoryBtn({
           <button
             className="px-5"
             key={category}
-            onClick={() => categoryChange({ section, category })}
+            onClick={() => categoryChange(category)}
             type="button"
           >
             {category}

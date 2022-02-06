@@ -1,46 +1,47 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchMovies, changeCategory, contentList } from './contentListSlice';
+import React, { useState } from 'react';
 
 import CategoryBtn from './categoryBtn';
 import { Poster, Slide } from '../index';
+import useFetchData from '../custom/useFetchData.tsx';
+import Loading from './Loading';
 
 export default function contentListContainer({
   urls,
+  target,
   name,
   categories,
   title,
 }) {
-  const dispatch = useDispatch();
-  const { items } = useSelector(contentList);
+  const [currentCategory, setCurrentCategory] = useState(target);
 
-  const item = items[name];
+  const { loading, error, data } = useFetchData({
+    endPoint: urls[currentCategory],
+  });
 
-  useEffect(() => {
-    if (!items[name].section[items[name].currentCategory]) {
-      dispatch(
-        fetchMovies({
-          name,
-          url: urls[item.currentCategory],
-          category: items[name].currentCategory,
-        }),
-      );
-    }
-  }, [dispatch, items[name].currentCategory]);
-
-  const categoryChange = ({ category, section }) => {
-    dispatch(changeCategory({ category, name: section }));
+  const categoryChange = (section) => {
+    setCurrentCategory(section);
   };
 
   const renderContentsList = () => {
-    const category = item.currentCategory;
-    const contents =
-      (item.section[category] && item.section[category].data) || [];
+    if (error) return <p>에러가 발생하였습니다. </p>;
+    if (loading)
+      return (
+        <div>
+          <div className="flex flex-row my-3 px-5">
+            <div className="flex items-center">
+              <p className="font-bold">{title}</p>
+            </div>
+            <CategoryBtn
+              categories={categories}
+              section={name}
+              currentCategory={currentCategory}
+              categoryChange={categoryChange}
+            />
+          </div>
 
-    if (!item.section[category]) return <p>Loading...</p>;
-    if (item.section[category].hasErrors)
-      return <p>api를 불러오지 못했습니다. 새로고침을 해주세요.</p>;
-
+          <Loading />
+        </div>
+      );
     return (
       <div>
         <div className="flex flex-row my-3 px-5">
@@ -48,15 +49,14 @@ export default function contentListContainer({
             <p className="font-bold">{title}</p>
           </div>
           <CategoryBtn
-            items={items}
             categories={categories}
             section={name}
-            currentCategory={category}
+            currentCategory={currentCategory}
             categoryChange={categoryChange}
           />
         </div>
 
-        <Slide Component={Poster} contents={contents} />
+        <Slide Component={Poster} contents={data.results} />
       </div>
     );
   };
