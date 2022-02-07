@@ -67,12 +67,14 @@ npm build
 - [x] 코드 리팩토링
   - [x] 여러 곳에 중복되서 사용되는 슬라이드 함수 만들기
   - [x] custom hook을 이용해 일부 컴포넌트에서 Data patch 과정 중복 제거
-  - [x] swr을 추가하여 필요없는 reducer 제거
+  - [ ] swr을 추가하여 필요없는 reducer 제거 - 진행중
 - [ ] 초기 구동 속도 향상
 - [ ] code splitting 코드 해체 분석하기 - 원리에 대해 잘모름.
 - [ ] react-helmet 적용하기
 
+### 해결해야하는 문제
 
+- 인피니티 스크롤 구현 중에 범위로 `data-fetch`를 할 경우 한 번의 콜백함수를 실행 시키기위해 `throttle`과 함께 구현을 하였음에도 여러번 호출되는 결과가 발생하여 스크롤이 바닥에 닿았을때만 `data-fetch`를 하는 방식으로 변경하여 임시 조치함. 
 
 ## lighthouse 결과
 
