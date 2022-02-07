@@ -1,82 +1,52 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { debounce } from 'lodash';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
+import useSWRInfinite from 'swr/infinite';
+import axios from 'axios';
 import { Helmet } from 'react-helmet';
-import {
-  fetchContents,
-  content,
-  fecthMoreContents,
-  changePage,
-  initPage,
-  changeIsMount,
-} from '../contentSlice';
 
 import { Poster } from '../../component/index';
 import SearchContent from '../search/searchContent';
+import InfinityScroll from '../InfinityScroll.tsx';
 
 export default function movieContainer({ section }) {
-  const location = useLocation();
+  const fetcher = (url) => axios.get(url).then((res) => res.data);
 
-  const { loading, hasErrors, data, page, isMount } = useSelector(content);
-  const url = `https://api.themoviedb.org/3/movie/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=${page}`;
-
-  const dispatch = useDispatch();
-
-  const handleScroll = (e) => {
+  const getKey = (pageIndex, previousPageData) => {
     if (
-      e.target.scrollingElement.scrollHeight ===
-      window.scrollY + window.innerHeight
-    ) {
-      dispatch(changePage());
-    }
+      previousPageData &&
+      previousPageData.page === previousPageData.total_pages
+    )
+      return null;
+    return `https://api.themoviedb.org/3/movie/${section}?api_key=${
+      process.env.REACT_APP_API_CODE
+    }&language=ko&page=${pageIndex + 1}`;
   };
 
-  useEffect(() => {
-    dispatch(initPage());
-    dispatch(
-      fetchContents(
-        `https://api.themoviedb.org/3/movie/${section}?api_key=${process.env.REACT_APP_API_CODE}&language=ko&page=1`,
-      ),
-    );
-  }, [location]);
+  const {
+    data = [],
+    error,
+    size,
+    setSize,
+  } = useSWRInfinite(getKey, fetcher, { focusThrottleInterval: 1000 });
 
-  useEffect(() => {
-    if (isMount) {
-      window.addEventListener(
-        'scroll',
-        debounce((e) => handleScroll(e), 15),
-      );
-      dispatch(changeIsMount());
-    }
-    if (page > 1) {
-      dispatch(fecthMoreContents(url));
-    }
-
-    return () => {
-      window.removeEventListener(
-        'scroll',
-        debounce((e) => handleScroll(e), 15),
-      );
-    };
-  }, [page]);
+  const isLoading = !data && !error;
 
   const renderContents = () => {
-    if (loading) return <p>loading....</p>;
-    if (hasErrors) return <p>api error page</p>;
-
     if (window.innerWidth <= 500) {
-      return data.map((element) => <SearchContent content={element} />);
+      return data.map((contents) =>
+        contents.results.map((element) => <SearchContent content={element} />),
+      );
     }
     return (
       <div className="grid grid-cols-5 pt-10">
-        {data.map((element) => (
-          <div>
-            <div className="h-list">
-              <Poster content={element} key={element.id} />
+        {data.map((contents) =>
+          contents.results.map((element) => (
+            <div>
+              <div className="h-list">
+                <Poster content={element} key={element.id} />
+              </div>
             </div>
-          </div>
-        ))}
+          )),
+        )}
       </div>
     );
   };
@@ -113,10 +83,14 @@ export default function movieContainer({ section }) {
       </div>
     );
   };
+
+  console.log(data);
   return (
     <div className="mx-auto w-screen pt-30 py-28 mobile:px-5 mobile:w-full">
       {headLine()}
-      <div>{renderContents()}</div>
+      <InfinityScroll isLoading={isLoading} size={size} setSize={setSize}>
+        {renderContents()}
+      </InfinityScroll>
     </div>
   );
 }
