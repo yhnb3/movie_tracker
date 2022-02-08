@@ -24,7 +24,6 @@ const InfinityScroll = ({isLoading, setSize, size, children, dataLen} : Props) =
     window.addEventListener('scroll', throttling);
 
     return () => {
-      console.log('is removed?')
       window.removeEventListener('scroll', throttling);
       throttling.cancel();
     };

@@ -84,7 +84,6 @@ export default function movieContainer({ section }) {
     );
   };
 
-  console.log(data);
   return (
     <div className="mx-auto w-screen pt-30 py-28 mobile:px-5 mobile:w-full">
       {headLine()}
