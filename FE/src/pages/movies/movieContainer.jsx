@@ -88,7 +88,12 @@ export default function movieContainer({ section }) {
   return (
     <div className="mx-auto w-screen pt-30 py-28 mobile:px-5 mobile:w-full">
       {headLine()}
-      <InfinityScroll isLoading={isLoading} size={size} setSize={setSize}>
+      <InfinityScroll
+        isLoading={isLoading}
+        size={size}
+        setSize={setSize}
+        dataLen={data.length}
+      >
         {renderContents()}
       </InfinityScroll>
     </div>

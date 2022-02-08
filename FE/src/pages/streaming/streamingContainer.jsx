@@ -76,7 +76,12 @@ export default function streamingContainer({ section }) {
   return (
     <div className="mx-auto w-screen py-28 mobile:px-5 mobile:w-full">
       {headLine()}
-      <InfinityScroll isLoading={isLoading} size={size} setSize={setSize}>
+      <InfinityScroll
+        isLoading={isLoading}
+        size={size}
+        setSize={setSize}
+        dataLen={data.length}
+      >
         {renderContents()}
       </InfinityScroll>
     </div>

@@ -6,15 +6,13 @@ interface Props {
   isLoading: boolean,
   size: number,
   setSize: (size: number) => void,
-  children: React.FC
+  children: React.FC,
+  dataLen: number
 }
-const InfinityScroll = ({isLoading, setSize, size, children} : Props) => {
-  
+const InfinityScroll = ({isLoading, setSize, size, children, dataLen} : Props) => {
   const _throttle = throttle((e) => {
-  
-    if (isLoading) return;
     if (
-      e.target.scrollingElement.scrollHeight <=
+      e.target.scrollingElement.scrollHeight - 300 <=
       window.scrollY + window.innerHeight
     ) {
       setSize(size + 1);
@@ -26,10 +24,11 @@ const InfinityScroll = ({isLoading, setSize, size, children} : Props) => {
     window.addEventListener('scroll', throttling);
 
     return () => {
+      console.log('is removed?')
       window.removeEventListener('scroll', throttling);
       throttling.cancel();
     };
-  }, [size]);
+  },[dataLen]);
  
   if (isLoading) return <></>
   return children

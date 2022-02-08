@@ -30,6 +30,7 @@ export default function personContainer({ section }) {
 
   const isLoading = !data && !error;
 
+  console.log(size, data);
   return (
     <div>
       <Helmet>
@@ -37,7 +38,12 @@ export default function personContainer({ section }) {
         <meta name="description" content="Helmet application" />
       </Helmet>
       <div className="w-screen mx-auto py-28 mobile:px-0 mobile:w-full">
-        <InfinityScroll isLoading={isLoading} size={size} setSize={setSize}>
+        <InfinityScroll
+          isLoading={isLoading}
+          size={size}
+          setSize={setSize}
+          dataLen={data.length}
+        >
           {data.map((element) => (
             <PersonList key={element.page} persons={element.results} />
           ))}
