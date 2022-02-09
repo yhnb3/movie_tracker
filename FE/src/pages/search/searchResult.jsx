@@ -1,52 +1,107 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import qs from 'qs';
+import useSWRInfinite from 'swr/infinite';
+import axios from 'axios';
 
 import { useLocation, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { FaSearch } from '@react-icons/all-files/fa/FaSearch';
 import { BsDot } from '@react-icons/all-files/bs/BsDot';
 
 import { Helmet } from 'react-helmet';
-import {
-  search,
-  fetchSearchResult,
-  fetchMoreSearchResult,
-  changePage,
-  changeSection,
-  changeIsMount,
-} from './searchSlice';
-import SearchContent from './searchContent';
 import Pagination from './pagination';
+import ContentSearchResult from './ContentSerachResult.tsx';
+
+const fetcher = (url) => axios.get(url).then((res) => res.data);
 
 export default function searchResult() {
   const location = useLocation();
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  const { loading, isError, data, currentSection, isMount, currentPage } =
-    useSelector(search);
-  const dispatch = useDispatch();
+
+  const [currentSection, setCurrentSection] = useState('movie');
+
+  const {
+    data: personData,
+    error: personError,
+    size: personCurrentPage,
+    setSize: personSetCurrentPage,
+  } = useSWRInfinite((pageIndex, previousPageData) => {
+    if (
+      previousPageData &&
+      previousPageData.page === previousPageData.total_pages
+    )
+      return null;
+    return `https://api.themoviedb.org/3/search/person?api_key=${
+      process.env.REACT_APP_API_CODE
+    }&language=ko&query=${query.query}&page=${
+      pageIndex + 1
+    }&include_adult=false`;
+  }, fetcher);
+
+  const {
+    data: tvData,
+    error: tvError,
+    size: tvCurrentPage,
+    setSize: tvSetCurrentPage,
+  } = useSWRInfinite((pageIndex, previousPageData) => {
+    if (
+      previousPageData &&
+      previousPageData.page === previousPageData.total_pages
+    )
+      return null;
+    return `https://api.themoviedb.org/3/search/tv?api_key=${
+      process.env.REACT_APP_API_CODE
+    }&language=ko&query=${query.query}&page=${
+      pageIndex + 1
+    }&include_adult=false`;
+  }, fetcher);
+
+  const {
+    data: movieData,
+    error: movieError,
+    size: movieCurrentPage,
+    setSize: movieSetCurrentPage,
+  } = useSWRInfinite((pageIndex, previousPageData) => {
+    if (
+      previousPageData &&
+      previousPageData.page === previousPageData.total_pages
+    )
+      return null;
+    return `https://api.themoviedb.org/3/search/movie?api_key=${
+      process.env.REACT_APP_API_CODE
+    }&language=ko&query=${query.query}&page=${
+      pageIndex + 1
+    }&include_adult=false`;
+  }, fetcher);
+
+  const initialTvLoading = !tvError && !tvData;
+  const initialPersonLoading = !personError && !personData;
+  const initialMovieLoading = !movieError && !movieData;
+
+  const tvLoading =
+    initialTvLoading ||
+    (tvCurrentPage > 0 &&
+      tvData &&
+      typeof tvData[tvCurrentPage - 1] === 'undefined');
+
+  const personLoading =
+    initialPersonLoading ||
+    (personCurrentPage > 0 &&
+      personData &&
+      typeof personData[personCurrentPage - 1] === 'undefined');
+
+  const movieLoading =
+    initialMovieLoading ||
+    (movieCurrentPage > 0 &&
+      movieData &&
+      typeof movieData[movieCurrentPage - 1] === 'undefined');
 
   const [isHover, setIsHover] = useState({
     movie: false,
     tv: false,
     person: false,
   });
-
-  useEffect(() => {
-    if (!isMount) {
-      dispatch(fetchSearchResult(query.query));
-      dispatch(changeIsMount());
-    } else if (data[currentSection][currentPage] === undefined) {
-      dispatch(
-        fetchMoreSearchResult({
-          section: currentSection,
-          query: query.query,
-          page: currentPage,
-        }),
-      );
-    }
-  }, [location, currentPage]);
 
   const mouseOn = (section) => {
     setIsHover({ ...isHover, [section]: true });
@@ -57,9 +112,9 @@ export default function searchResult() {
 
   const sectionResulst = () => {
     const results = [
-      { section: '영화', name: 'movie', count: data.movie.totalResults },
-      { section: 'TV 프로그램', name: 'tv', count: data.tv.totalResults },
-      { section: '인물', name: 'person', count: data.person.totalResults },
+      { section: '영화', name: 'movie', count: movieData[0].total_results },
+      { section: 'TV 프로그램', name: 'tv', count: tvData[0].total_results },
+      { section: '인물', name: 'person', count: personData[0].total_results },
     ];
 
     return results.map((element) => (
@@ -76,8 +131,8 @@ export default function searchResult() {
         onFocus={() => mouseOn(element.name)}
         onMouseOut={() => mouseOut(element.name)}
         onBlur={() => mouseOut(element.name)}
-        onClick={() => dispatch(changeSection({ section: element.name }))}
-        onKeyDown={() => dispatch(changeSection({ section: element.name }))}
+        onClick={() => setCurrentSection(element.name)}
+        onKeyDown={() => setCurrentSection(element.name)}
       >
         <span
           className={`p-1 ${
@@ -98,56 +153,11 @@ export default function searchResult() {
       </div>
     ));
   };
-
-  const contentResult = () => {
-    if (loading) return <p>아직 로딩중</p>;
-    if (isError)
-      return (
-        <p>
-          데이터를 불러오는 중 오류가 생겼습니다. 잠시후에 다시 시도해보세요.
-        </p>
-      );
-    if (
-      data[currentSection].totalResults &&
-      data[currentSection][currentPage]
-    ) {
-      return (
-        <div>
-          {data[currentSection][currentPage].map((element) => (
-            <SearchContent key={element.id} content={element} />
-          ))}
-          {data[currentSection].totalPage > 1 ? (
-            <Pagination
-              page={currentPage}
-              totalPage={data[currentSection].totalPage}
-              section={currentSection}
-              onChangePage={(newPage) =>
-                dispatch(changePage({ section: currentSection, page: newPage }))
-              }
-            />
-          ) : (
-            <></>
-          )}
-        </div>
-      );
-    }
-    return <p>왜 안되지</p>;
-  };
   const personResult = () => {
-    if (loading) return <p>아직 로딩중</p>;
-    if (isError)
-      return (
-        <p>
-          데이터를 불러오는 중 오류가 생겼습니다. 잠시후에 다시 시도해보세요.
-        </p>
-      );
-    if (
-      data[currentSection].totalResults &&
-      data[currentSection][currentPage]
-    ) {
+    if (personData[personCurrentPage - 1].results.length > 0) {
       return (
         <div className="mt-10">
-          {data[currentSection][currentPage].map((element) => (
+          {personData[personCurrentPage - 1].results.map((element) => (
             <div className="flex flex-row mt-5 h-full" key={element.id}>
               <Link to={`/person/${element.id}`}>
                 <img
@@ -191,14 +201,11 @@ export default function searchResult() {
               </div>
             </div>
           ))}
-          {data[currentSection].totalPage > 1 ? (
+          {personData[0].totalPage > 1 ? (
             <Pagination
-              page={currentPage}
-              totalPage={data[currentSection].totalPage}
-              section={currentSection}
-              onChangePage={(newPage) =>
-                dispatch(changePage({ section: currentSection, page: newPage }))
-              }
+              page={personCurrentPage}
+              totalPage={personData[0].total_pages}
+              onChangePage={(page) => personSetCurrentPage(page)}
             />
           ) : (
             <></>
@@ -208,6 +215,37 @@ export default function searchResult() {
     }
     return <p>검색결과가 없습니다.</p>;
   };
+
+  const Result = () => {
+    if (currentSection === 'person') {
+      if (personLoading) return <p>로딩중...</p>;
+      return personResult();
+    }
+    if (currentSection === 'tv') {
+      if (tvLoading) return <p>로딩중...</p>;
+      return (
+        <ContentSearchResult
+          contents={tvData[tvCurrentPage - 1].results}
+          currentPage={tvCurrentPage}
+          totalPage={tvData[0].total_pages}
+          setCurrentPage={tvSetCurrentPage}
+        />
+      );
+    }
+    if (movieLoading) return <p>로딩중...</p>;
+    return (
+      <ContentSearchResult
+        contents={movieData[movieCurrentPage - 1].results}
+        currentPage={movieCurrentPage}
+        totalPage={movieData[0].total_pages}
+        setCurrentPage={movieSetCurrentPage}
+      />
+    );
+  };
+
+  if (initialTvLoading || initialPersonLoading || initialMovieLoading)
+    return <p>로딩 중...</p>;
+  if (tvError || personError || movieError) return <p>에러...</p>;
 
   return (
     <div className="pb-28 pt-20">
@@ -244,11 +282,7 @@ export default function searchResult() {
           </div>
         </div>
         <div className="w-8/12 mobile:w-full mobile:px-5">
-          {currentSection === 'person' ? (
-            <div>{personResult()}</div>
-          ) : (
-            <div>{contentResult()}</div>
-          )}
+          <Result />
         </div>
       </div>
     </div>

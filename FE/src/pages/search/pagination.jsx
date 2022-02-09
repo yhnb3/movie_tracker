@@ -3,7 +3,7 @@ import { CgArrowLeft } from '@react-icons/all-files/cg/CgArrowLeft';
 import { CgArrowRight } from '@react-icons/all-files/cg/CgArrowRight';
 
 export default function pagination({ page, totalPage, onChangePage }) {
-  const pages = [...Array(totalPage).keys()].map((_, idx) => idx + 1);
+  const pages = [...Array(totalPage)].map((_, idx) => idx + 1);
 
   return (
     <div className="mx-auto mt-10">

@@ -7,10 +7,10 @@ interface Props {
 }
 
 
-const useFetchData: any = ({...props} : Props) => {
+const useFetchData: any = ({endPoint} : Props) => {
   const fetcher = (url : string) => axios.get(url).then((res) => res.data)
   const { data, error } = useSWR(
-    props.endPoint,
+    endPoint,
     fetcher,
   );
 
