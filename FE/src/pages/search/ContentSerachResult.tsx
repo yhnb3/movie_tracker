@@ -16,8 +16,7 @@ interface Props {
   setCurrentPage: void
 }
 
-const ContentSearchResult: React.FC<Props> = ({contents, currentPage, totalPage, setCurrentPage } : Props) => {
-  return (
+const ContentSearchResult: React.FC<Props> = ({contents, currentPage, totalPage, setCurrentPage } : Props) =>
     <div>
       {contents.map((element: Content) => (
         <SearchContent key={element.id} content={element} />
@@ -31,7 +30,5 @@ const ContentSearchResult: React.FC<Props> = ({contents, currentPage, totalPage,
         <></>
       )}
     </div>
-  );
-}
 
 export default ContentSearchResult
