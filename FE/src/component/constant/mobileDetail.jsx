@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RateCircle from './rateCircle';
-import { ImportantCrew, RecomendationSection } from './section';
+import { ImportantCrew, RecommendationSection } from './section';
 import MobileCastList from './section/MobileCastList.tsx';
 
 export default function mobileDetail({ content }) {
@@ -103,7 +103,7 @@ export default function mobileDetail({ content }) {
           <ImportantCrew id={content.id} section={section} />
         </div>
         <MobileCastList id={content.id} section={section} />
-        <RecomendationSection id={content.id} section={section} />
+        <RecommendationSection id={content.id} section={section} />
       </div>
     </div>
   );
