@@ -5,6 +5,7 @@ import { ImportantCrew, RecomendationSection } from './section';
 import MobileCastList from './section/MobileCastList.tsx';
 
 export default function mobileDetail({ content }) {
+  console.log(content);
   const section = content.title ? 'movie' : 'tv';
   const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
