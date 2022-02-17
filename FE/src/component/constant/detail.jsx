@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 import SeasonsContainer from './SeasonsContainer.tsx';
 import MediaSection from './MediaSection.tsx';
 
-import { RecomendationSection, SummarySection, CastList } from './section';
+import { RecommendationSection, SummarySection, CastList } from './section';
 
 export default function detail({ content }) {
   const section = content.title ? 'movie' : 'tv';
@@ -24,7 +24,7 @@ export default function detail({ content }) {
         ) : (
           <SeasonsContainer seasons={content.seasons} />
         )}
-        <RecomendationSection id={content.id} section={section} />
+        <RecommendationSection id={content.id} section={section} />
       </div>
     </div>
   );
