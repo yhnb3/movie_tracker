@@ -36,20 +36,15 @@ export default function personHistory({ person }) {
                       <></>
                     )}
 
-                    <span className="my-2">
-                      <strong className="text-center p-2 font-bold whitespace-nowrap">
+                    <span className="my-2 max-w-full">
+                      <strong className="text-center p-2 font-bold">
                         <span>{content.title || content.name}</span>
                       </strong>
                       {content.character ? (
                         <span className="text-sm text-center">
                           {content.character}
                         </span>
-                      ) : (
-                        // <span className="text-gray-400 text-center pl-1 py-2">
-
-                        // </span>
-                        <></>
-                      )}
+                      ) : null}
                     </span>
                   </div>
                 ))}

@@ -1,7 +1,13 @@
 import React from 'react';
+import useFetchData from '../../custom/useFetchData.tsx';
 
-export default function importantCrew({ crew }) {
-  const canBe = crew.filter(
+export default function importantCrew({ id, section }) {
+  const endPoint = `https://api.themoviedb.org/3/${section}/${id}/credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`;
+  const { loading, error, data } = useFetchData({ endPoint });
+  if (loading) return <p>로딩중...</p>;
+  if (error) return <p>에러가 발생하였습니다.</p>;
+
+  const canBe = data.crew.filter(
     (person) =>
       person.department === 'Writing' || person.department === 'Production',
   );

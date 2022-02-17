@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import RateCircle from './rateCircle';
 import { ImportantCrew, RecomendationSection } from './section';
+import MobileCastList from './section/MobileCastList.tsx';
 
 export default function mobileDetail({ content }) {
+  const section = content.title ? 'movie' : 'tv';
   const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const date = content.title ? content.release_date : content.first_air_date;
@@ -98,41 +99,10 @@ export default function mobileDetail({ content }) {
               </p>
             </div>
           </div>
-          <ImportantCrew crew={content.crew} />
+          <ImportantCrew id={content.id} section={section} />
         </div>
-        <div className="my-5">
-          <p className="font-bold text-xl m-2">주요 출연진</p>
-          <div className=" scrollbar-thumb-rounded scrollbar-thin scrollbar-thumb-gray-300 whitespace-nowrap overflow-x-auto">
-            {content.cast.map((element) => {
-              if (element.order < 7) {
-                return (
-                  <div
-                    className="inline-flex flex-col w-32 border border-gray-200 rounded-lg m-4 shadow-md h-56"
-                    key={element.id}
-                  >
-                    <Link to={`/person/${element.id}`}>
-                      <img
-                        className="w-32 h-36 object-cover object-top rounded-lg"
-                        src={`https://image.tmdb.org/t/p/original/${element.profile_path}`}
-                        alt={element.name}
-                      />
-                    </Link>
-                    <div className="p-1">
-                      <p className="text-sm font-bold whitespace-normal">
-                        {element.name}
-                      </p>
-                      <p className="text-xs text-gray-400 whitespace-normal">
-                        {element.character}
-                      </p>
-                    </div>
-                  </div>
-                );
-              }
-              return <></>;
-            })}
-          </div>
-        </div>
-        <RecomendationSection contents={content.recommend} />
+        <MobileCastList id={content.id} section={section} />
+        <RecomendationSection id={content.id} section={section} />
       </div>
     </div>
   );

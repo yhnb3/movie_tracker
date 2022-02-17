@@ -9,9 +9,6 @@ export default function personDetailContainer() {
   const { id } = useParams();
 
   const endPoint = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_API_CODE}&language=ko`;
-  // `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
-
-  // `https://api.themoviedb.org/3/person/${id}/external_ids?api_key=${process.env.REACT_APP_API_CODE}&language=ko`,
 
   const { loading, error, data } = useFetchData({
     endPoint,
