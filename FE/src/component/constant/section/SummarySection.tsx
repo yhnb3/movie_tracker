@@ -25,6 +25,7 @@ interface Props {
   } 
 }
 const SummarySection: React.FC<Props> = ({content} : Props) => {
+  console.log(content.production_countries)
   const section = content.title ? 'movie' : 'tv'
   const date = content.title ? content.release_date : content.first_air_date;
   const backdropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
@@ -111,7 +112,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
           </div>
           <div className="p-1">
             {renderDate()}
-            <span>({content.production_countries[0].iso_3166_1})</span>
+            <span>({content.production_countries[0] ? content.production_countries[0].iso_3166_1 : "없음"})</span>
             {renderGenre()}
           </div>
         </div>
